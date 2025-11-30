@@ -1,0 +1,131 @@
+(footprint "GY-SHT31-D"
+	(version 20250926)
+	(generator "pcbnew")
+	(generator_version "9.99")
+	(layer "F.Cu")
+	(property "Reference" "REF**"
+		(at 3.58 8.89 90)
+		(unlocked yes)
+		(layer "F.SilkS")
+		(uuid "4b1a8d3e-ff30-4e6a-89ec-11c4c74f4b40")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.1)
+			)
+		)
+	)
+	(property "Value" "GY-SHT31-D"
+		(at 5.08 8.89 90)
+		(unlocked yes)
+		(layer "F.Fab")
+		(uuid "4ef3654f-20fd-45c7-8e78-9c03256fa45c")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Datasheet" ""
+		(at 0 0 0)
+		(unlocked yes)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "2ef0c98c-0b6f-4030-bed4-fec939a8b861")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Description" ""
+		(at 0 0 0)
+		(unlocked yes)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "44a4f5dd-d6c5-4cff-bd74-8380f2627a45")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(attr through_hole)
+	(duplicate_pad_numbers_are_jumpers no)
+	(fp_rect
+		(start 0 0)
+		(end 10.4 15.24)
+		(radius 0.635)
+		(stroke
+			(width 0.1)
+			(type solid)
+		)
+		(fill no)
+		(layer "F.SilkS")
+		(uuid "bec185c5-0ac0-47d0-b007-96e2943b04cd")
+	)
+	(fp_text user "${REFERENCE}"
+		(at 6.58 8.89 90)
+		(unlocked yes)
+		(layer "F.Fab")
+		(uuid "d934c319-0dab-4848-8e52-6329a0629e48")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(pad "1" thru_hole oval
+		(at 9.064391 1.779346 270)
+		(size 2.54 1.27)
+		(drill 1)
+		(layers "*.Cu" "*.Mask")
+		(remove_unused_layers no)
+		(tenting
+			(front none)
+			(back none)
+		)
+		(uuid "033b8de6-917c-424f-bc93-ee78ccdbc69a")
+	)
+	(pad "2" thru_hole oval
+		(at 6.524391 1.779346 270)
+		(size 2.54 1.27)
+		(drill 1)
+		(layers "*.Cu" "*.Mask")
+		(remove_unused_layers no)
+		(tenting
+			(front none)
+			(back none)
+		)
+		(uuid "ac7c9d35-8622-48cd-aa7a-a9068a100568")
+	)
+	(pad "3" thru_hole oval
+		(at 3.984391 1.779346 270)
+		(size 2.54 1.27)
+		(drill 1)
+		(layers "*.Cu" "*.Mask")
+		(remove_unused_layers no)
+		(tenting
+			(front none)
+			(back none)
+		)
+		(uuid "8d839ee2-7335-49be-8a49-e535bb68d0af")
+	)
+	(pad "4" thru_hole oval
+		(at 1.444391 1.779346 270)
+		(size 2.54 1.27)
+		(drill 1)
+		(layers "*.Cu" "*.Mask")
+		(remove_unused_layers no)
+		(tenting
+			(front none)
+			(back none)
+		)
+		(uuid "546ffda4-c25b-48d4-94f0-80d6c31afa9a")
+	)
+	(embedded_fonts no)
+)
