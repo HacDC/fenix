@@ -1,5 +1,5 @@
 (footprint "Adafruit_BNO055"
-	(version 20250926)
+	(version 20251101)
 	(generator "pcbnew")
 	(generator_version "9.99")
 	(layer "F.Cu")
@@ -7,7 +7,7 @@
 		(at 0 -1.5 0)
 		(unlocked yes)
 		(layer "F.SilkS")
-		(uuid "47b73e1f-169e-4580-b9a0-c5a836ce0c09")
+		(uuid "3ef79a5f-b896-41cb-8db0-59cd9006a0e7")
 		(effects
 			(font
 				(size 1 1)
@@ -19,7 +19,7 @@
 		(at 0 0 0)
 		(unlocked yes)
 		(layer "F.Fab")
-		(uuid "6a064ef4-ccd3-4df2-afed-c7dda3cd7c85")
+		(uuid "1d87a5a6-9363-42ca-9703-b22d238f6767")
 		(effects
 			(font
 				(size 1 1)
@@ -32,7 +32,7 @@
 		(unlocked yes)
 		(layer "F.Fab")
 		(hide yes)
-		(uuid "cfa99065-e2a9-4f32-be17-05c8e0fbc80e")
+		(uuid "2cc8ef03-ea00-4727-a35f-c61399316db3")
 		(effects
 			(font
 				(size 1 1)
@@ -45,7 +45,7 @@
 		(unlocked yes)
 		(layer "F.Fab")
 		(hide yes)
-		(uuid "fc24cbee-d2eb-4e91-b596-81f0c3c69864")
+		(uuid "ad8ea4b5-39f3-4eb7-8207-333de12e1012")
 		(effects
 			(font
 				(size 1 1)
@@ -65,67 +65,19 @@
 		)
 		(fill no)
 		(layer "F.SilkS")
-		(uuid "a78d988c-f1b3-4d04-913c-d9038e373e55")
+		(uuid "53d5a789-c166-44ce-822e-8f417a2f19df")
 	)
 	(fp_text user "${REFERENCE}"
 		(at 0 1.5 0)
 		(unlocked yes)
 		(layer "F.Fab")
-		(uuid "1a0dcc1d-a6ee-4b3b-b6ec-677cbb2ac674")
+		(uuid "f6a5ec78-506a-48d6-8b98-7e17d421ee45")
 		(effects
 			(font
 				(size 1 1)
 				(thickness 0.15)
 			)
 		)
-	)
-	(pad "" np_thru_hole circle
-		(at -10.16 -7.62 90)
-		(size 2.6 2.6)
-		(drill 2.5)
-		(property pad_prop_mechanical)
-		(layers "*.Cu" "*.Mask")
-		(tenting
-			(front none)
-			(back none)
-		)
-		(uuid "b12e13f6-73e1-44ab-a2cf-73a2b70c6282")
-	)
-	(pad "" np_thru_hole circle
-		(at -10.16 7.62 90)
-		(size 2.6 2.6)
-		(drill 2.5)
-		(property pad_prop_mechanical)
-		(layers "*.Cu" "*.Mask")
-		(tenting
-			(front none)
-			(back none)
-		)
-		(uuid "3c7b5efc-ed9a-4493-a2ba-82da8793cbe1")
-	)
-	(pad "" np_thru_hole circle
-		(at 10.16 -7.62 90)
-		(size 2.6 2.6)
-		(drill 2.5)
-		(property pad_prop_mechanical)
-		(layers "*.Cu" "*.Mask")
-		(tenting
-			(front none)
-			(back none)
-		)
-		(uuid "65ecf854-eed5-46e8-b560-741f23d79c7c")
-	)
-	(pad "" np_thru_hole circle
-		(at 10.16 7.62 90)
-		(size 2.6 2.6)
-		(drill 2.5)
-		(property pad_prop_mechanical)
-		(layers "*.Cu" "*.Mask")
-		(tenting
-			(front none)
-			(back none)
-		)
-		(uuid "9a0d4445-4621-4d33-9c02-8674af51dbed")
 	)
 	(pad "1" thru_hole oval
 		(at -6.35 7.62 90)
@@ -137,7 +89,7 @@
 			(front none)
 			(back none)
 		)
-		(uuid "1da9c432-e3bd-49fa-82fd-e5e16dff15ed")
+		(uuid "c8428d06-cc9e-4367-8b2c-b8b89edc427f")
 	)
 	(pad "2" thru_hole oval
 		(at -3.81 7.62 90)
@@ -149,7 +101,7 @@
 			(front none)
 			(back none)
 		)
-		(uuid "0a41abb4-6944-48ff-a773-ef8bcee7d4f5")
+		(uuid "e219d4b5-b4c4-4cc6-bbf1-6ea0e522ac0f")
 	)
 	(pad "3" thru_hole oval
 		(at -1.27 7.62 90)
@@ -161,7 +113,7 @@
 			(front none)
 			(back none)
 		)
-		(uuid "352e449e-60ab-473d-b932-339251b9d96b")
+		(uuid "e08f2829-baf3-42be-b6b2-28dfc5d4e411")
 	)
 	(pad "4" thru_hole oval
 		(at 1.27 7.62 90)
@@ -173,7 +125,7 @@
 			(front none)
 			(back none)
 		)
-		(uuid "eb03f8ed-695b-467a-9ab9-ddab8bf8738a")
+		(uuid "5f52430f-16e7-4884-a71c-2b8e32ca6afd")
 	)
 	(pad "5" thru_hole oval
 		(at 3.81 7.62 90)
@@ -185,7 +137,7 @@
 			(front none)
 			(back none)
 		)
-		(uuid "b76910c5-64ae-409b-ba61-55bc1bbba2d8")
+		(uuid "6f7e5767-8f74-4aa8-bea9-a755e8b1c215")
 	)
 	(pad "6" thru_hole oval
 		(at 6.35 7.62 90)
@@ -197,7 +149,7 @@
 			(front none)
 			(back none)
 		)
-		(uuid "54e13420-fdc5-4590-a903-5cb540cf7538")
+		(uuid "5fc0aff7-e913-40ab-bf4e-6974949a85d9")
 	)
 	(pad "7" thru_hole oval
 		(at 3.81 -7.62 90)
@@ -209,7 +161,7 @@
 			(front none)
 			(back none)
 		)
-		(uuid "3f802a81-214f-41d7-95b5-38b113132b86")
+		(uuid "f32a20bc-991c-4aa4-8a1b-c6918b6a67f7")
 	)
 	(pad "8" thru_hole oval
 		(at 1.27 -7.62 90)
@@ -221,7 +173,7 @@
 			(front none)
 			(back none)
 		)
-		(uuid "aecd2378-3f6c-45f2-88f7-2a8656bb3b6e")
+		(uuid "a89e5d22-21c8-4e62-9cfd-031d0ed214e7")
 	)
 	(pad "9" thru_hole oval
 		(at -1.27 -7.62 90)
@@ -233,7 +185,7 @@
 			(front none)
 			(back none)
 		)
-		(uuid "c3ee4597-29f8-430a-b9a9-e9632f1ec8ff")
+		(uuid "0818f444-b5ae-474c-9841-c27108f21ed6")
 	)
 	(pad "10" thru_hole oval
 		(at -3.81 -7.62 90)
@@ -245,7 +197,7 @@
 			(front none)
 			(back none)
 		)
-		(uuid "4458038b-e3f1-4d0b-a3f3-6de526a77c77")
+		(uuid "364a16b1-33ba-4d5c-834c-c55f02d303cf")
 	)
 	(embedded_fonts no)
 	(model "/home/liz/Downloads/4646 BNO055 Stemma.step"

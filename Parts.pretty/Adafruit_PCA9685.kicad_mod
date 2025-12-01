@@ -1,14 +1,38 @@
 (footprint "Adafruit_PCA9685"
-	(version 20250926)
+	(version 20251101)
 	(generator "pcbnew")
 	(generator_version "9.99")
 	(layer "F.Cu")
+	(property "Reference" "REF**"
+		(at 0.635 -1.5 0)
+		(unlocked yes)
+		(layer "F.SilkS")
+		(uuid "ea2d6b1e-a98a-4f28-b8e1-01ee8025ac5f")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.1)
+			)
+		)
+	)
+	(property "Value" "Adafruit_PCA9685"
+		(at 0.635 0 0)
+		(unlocked yes)
+		(layer "F.Fab")
+		(uuid "7ab598e6-294b-4d0c-b240-aa3213a498b9")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
 	(property "Datasheet" ""
 		(at 0 0 0)
 		(unlocked yes)
 		(layer "F.Fab")
 		(hide yes)
-		(uuid "ea321328-8af2-465f-bb57-0204b8d79c78")
+		(uuid "b56a0911-3eff-4d4b-9b3c-cf372c374b5b")
 		(effects
 			(font
 				(size 1 1)
@@ -21,31 +45,7 @@
 		(unlocked yes)
 		(layer "F.Fab")
 		(hide yes)
-		(uuid "a77b7e9d-299f-4354-a5a5-c69d0a4d2c75")
-		(effects
-			(font
-				(size 1 1)
-				(thickness 0.15)
-			)
-		)
-	)
-	(property "Reference" "REF**"
-		(at 0.635 -1.5 0)
-		(unlocked yes)
-		(layer "F.SilkS")
-		(uuid "42bea039-4b1a-4186-9170-390447298f61")
-		(effects
-			(font
-				(size 1 1)
-				(thickness 0.1)
-			)
-		)
-	)
-	(property "Value" "Adafruit_PCA9685"
-		(at 0.635 0 0)
-		(unlocked yes)
-		(layer "F.Fab")
-		(uuid "d7a04fe4-819a-4536-8e58-a047da4b7d48")
+		(uuid "153c2ed2-6190-478f-95fc-ac4363ece125")
 		(effects
 			(font
 				(size 1 1)
@@ -65,67 +65,19 @@
 		)
 		(fill no)
 		(layer "F.SilkS")
-		(uuid "6cb6f225-ddf8-46f5-ac0a-f34d1b30aff9")
+		(uuid "537f17cd-0c5b-428f-9f7a-ff21f98147f3")
 	)
 	(fp_text user "${REFERENCE}"
 		(at 0.635 1.5 0)
 		(unlocked yes)
 		(layer "F.Fab")
-		(uuid "660588c8-6f8f-4806-a5f7-a3337fea1b22")
+		(uuid "637aefd2-9899-412e-a921-dd0ce28ca0da")
 		(effects
 			(font
 				(size 1 1)
 				(thickness 0.15)
 			)
 		)
-	)
-	(pad "" np_thru_hole circle
-		(at -27.935 -9.52)
-		(size 2.6 2.6)
-		(drill 2.5)
-		(property pad_prop_mechanical)
-		(layers "*.Cu" "*.Mask")
-		(tenting
-			(front none)
-			(back none)
-		)
-		(uuid "621cb38e-1ae3-4e0e-960e-ef380d29b3ce")
-	)
-	(pad "" np_thru_hole circle
-		(at -27.935 9.52)
-		(size 2.6 2.6)
-		(drill 2.5)
-		(property pad_prop_mechanical)
-		(layers "*.Cu" "*.Mask")
-		(tenting
-			(front none)
-			(back none)
-		)
-		(uuid "785a3e58-ed28-460b-9fc6-1b68fb1388b5")
-	)
-	(pad "" np_thru_hole circle
-		(at 27.935 -9.52)
-		(size 2.6 2.6)
-		(drill 2.5)
-		(property pad_prop_mechanical)
-		(layers "*.Cu" "*.Mask")
-		(tenting
-			(front none)
-			(back none)
-		)
-		(uuid "1bc1abb6-b690-4ea2-85a6-46120889d6a1")
-	)
-	(pad "" np_thru_hole circle
-		(at 27.935 9.52)
-		(size 2.6 2.6)
-		(drill 2.5)
-		(property pad_prop_mechanical)
-		(layers "*.Cu" "*.Mask")
-		(tenting
-			(front none)
-			(back none)
-		)
-		(uuid "34c901b1-3a8f-4227-8764-a10f68c6c452")
 	)
 	(pad "1" thru_hole oval
 		(at -29.215 -6.36)
@@ -137,7 +89,7 @@
 			(front none)
 			(back none)
 		)
-		(uuid "5540efdb-2420-4251-ad50-74cb2ba26676")
+		(uuid "64e3f38d-b6f4-417c-a972-93a9597a2c6a")
 	)
 	(pad "2" thru_hole oval
 		(at -29.215 -3.81)
@@ -149,7 +101,7 @@
 			(front none)
 			(back none)
 		)
-		(uuid "446e20fa-3f6e-4ba0-b0af-4d879eab8b30")
+		(uuid "fffd43dc-c0bb-4c7e-bdcc-ad0fea394b2b")
 	)
 	(pad "3" thru_hole oval
 		(at -29.215 -1.27)
@@ -161,7 +113,7 @@
 			(front none)
 			(back none)
 		)
-		(uuid "ee57b5df-62cf-4a43-a743-8eab9d6f725d")
+		(uuid "a7153cef-4161-4960-8fb6-92b7ffe89897")
 	)
 	(pad "4" thru_hole oval
 		(at -29.215 1.27)
@@ -173,7 +125,7 @@
 			(front none)
 			(back none)
 		)
-		(uuid "5c1120af-043b-455d-8c45-df3601517853")
+		(uuid "f80ac72e-0b1e-4f3c-98ce-1e8fae29d4a7")
 	)
 	(pad "5" thru_hole oval
 		(at -29.215 3.81)
@@ -185,7 +137,7 @@
 			(front none)
 			(back none)
 		)
-		(uuid "d1bd67f6-999c-4cae-b3b3-143d9ab2e688")
+		(uuid "ddd0e3a4-b4e0-4821-9111-151856c5d26a")
 	)
 	(pad "6" thru_hole oval
 		(at -29.215 6.35)
@@ -197,7 +149,7 @@
 			(front none)
 			(back none)
 		)
-		(uuid "1804763f-f4b3-4130-86fb-8249bcb03a9f")
+		(uuid "e093fff7-f34a-40f9-94c5-ff832741d197")
 	)
 	(pad "7" thru_hole oval
 		(at 29.205 6.26)
@@ -209,7 +161,7 @@
 			(front none)
 			(back none)
 		)
-		(uuid "26d6e65e-5796-4c4d-9466-1dece87780a8")
+		(uuid "d98deecd-1d72-49a4-bc08-f545729475b4")
 	)
 	(pad "8" thru_hole oval
 		(at 29.205 3.81)
@@ -221,7 +173,7 @@
 			(front none)
 			(back none)
 		)
-		(uuid "f6d9746a-d447-4451-9674-403e10faf5cf")
+		(uuid "82696401-75fa-4b7f-bcd3-c30766b13b20")
 	)
 	(pad "9" thru_hole oval
 		(at 29.205 1.27)
@@ -233,7 +185,7 @@
 			(front none)
 			(back none)
 		)
-		(uuid "ca88672f-d4b6-45c5-b96d-721de6e7c0fa")
+		(uuid "88f02cc7-b452-4dd8-bbec-0b9c5b23c500")
 	)
 	(pad "10" thru_hole oval
 		(at 29.205 -1.27)
@@ -245,7 +197,7 @@
 			(front none)
 			(back none)
 		)
-		(uuid "1dcd2cfc-76d1-404a-8244-2622872dfba8")
+		(uuid "ae955e31-fa5a-4818-aaca-95d511f12891")
 	)
 	(pad "11" thru_hole oval
 		(at 29.205 -3.81)
@@ -257,7 +209,7 @@
 			(front none)
 			(back none)
 		)
-		(uuid "881c686e-caa7-4117-a026-923711c5446f")
+		(uuid "c6ce9bfc-6e71-43ec-af77-db68f49fc88e")
 	)
 	(pad "12" thru_hole oval
 		(at 29.205 -6.35)
@@ -269,7 +221,7 @@
 			(front none)
 			(back none)
 		)
-		(uuid "a63a7079-0da8-435a-89ba-c4dbbc5c368f")
+		(uuid "5f10d5a7-d053-43c0-a026-2fa2c0a1189c")
 	)
 	(embedded_fonts no)
 	(model "/home/liz/Downloads/815 Servo Driver 16 Channel.step"
