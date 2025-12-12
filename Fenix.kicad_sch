@@ -1958,6 +1958,18 @@
 		)
 	)
 	(rectangle
+		(start 213.36 31.75)
+		(end 254 43.18)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(fill
+			(type none)
+		)
+		(uuid "0b7832de-1e10-440a-9caa-bada875d50c5")
+	)
+	(rectangle
 		(start 87.63 64.77)
 		(end 163.83 91.44)
 		(stroke
@@ -1982,6 +1994,18 @@
 		(uuid "31065317-58dc-44a1-840b-7cedd9bd8776")
 	)
 	(rectangle
+		(start 17.526 81.28)
+		(end 82.296 91.44)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(fill
+			(type none)
+		)
+		(uuid "8c1a20e2-cd5c-4a6f-a35e-d3e218a0fecb")
+	)
+	(rectangle
 		(start 17.78 16.51)
 		(end 82.55 76.2)
 		(stroke
@@ -1992,6 +2016,18 @@
 			(type none)
 		)
 		(uuid "aea3ae5d-b8c7-4de2-adff-edbd3aa96ac1")
+	)
+	(rectangle
+		(start 213.614 17.018)
+		(end 254.254 28.448)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(fill
+			(type none)
+		)
+		(uuid "cb7a9d88-f27c-4ea3-afd1-4d8666dcf3e2")
 	)
 	(rectangle
 		(start 168.91 16.51)
@@ -2007,7 +2043,7 @@
 	)
 	(rectangle
 		(start 168.91 52.07)
-		(end 209.55 76.2)
+		(end 209.55 91.44)
 		(stroke
 			(width 0)
 			(type default)
@@ -2019,13 +2055,23 @@
 	)
 	(text "Temperature + Humidity Module"
 		(exclude_from_sim no)
-		(at 193.548 74.93 0)
+		(at 192.786 89.154 0)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
 		)
 		(uuid "09d669ef-0004-486f-9a83-9c23e07203b6")
+	)
+	(text "uSD Card Module"
+		(exclude_from_sim no)
+		(at 245.11 41.656 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+		)
+		(uuid "2ca6eaef-a0da-4110-ad16-7dc00697dae6")
 	)
 	(text "Orientation + Compass Module"
 		(exclude_from_sim no)
@@ -2037,6 +2083,16 @@
 		)
 		(uuid "96f107ff-f14b-44fd-9943-55b028fcac99")
 	)
+	(text "Heater Control Module"
+		(exclude_from_sim no)
+		(at 242.57 26.67 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+		)
+		(uuid "972a89d9-a993-4141-945a-5fe0444afc09")
+	)
 	(text "Heltec LoRa 32 V4"
 		(exclude_from_sim no)
 		(at 72.644 74.93 0)
@@ -2046,6 +2102,16 @@
 			)
 		)
 		(uuid "a6fd3bb3-2eca-4940-bfb4-3649ee6eacf4")
+	)
+	(text "Power Module\n"
+		(exclude_from_sim no)
+		(at 74.676 89.916 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+		)
+		(uuid "b2c838c1-dc48-426c-ae26-ca3b4d9a3aae")
 	)
 	(text "GPS & Real-Time Clock Module"
 		(exclude_from_sim no)
@@ -2196,6 +2262,16 @@
 			(type default)
 		)
 		(uuid "2739b4cd-dafe-491c-8700-cdb798645dcf")
+	)
+	(wire
+		(pts
+			(xy 176.53 77.47) (xy 187.96 77.47)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "28c41d90-d7f4-4fb4-afef-6628aad3e78d")
 	)
 	(wire
 		(pts
@@ -2359,6 +2435,26 @@
 	)
 	(wire
 		(pts
+			(xy 176.53 80.01) (xy 176.53 78.74)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "61bd67cc-1400-4967-8203-7b5a08ea1b5f")
+	)
+	(wire
+		(pts
+			(xy 182.88 78.74) (xy 176.53 78.74)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "66daee95-9cb8-4775-844e-1388e1defb3c")
+	)
+	(wire
+		(pts
 			(xy 33.02 35.56) (xy 33.02 27.94)
 		)
 		(stroke
@@ -2409,6 +2505,16 @@
 	)
 	(wire
 		(pts
+			(xy 187.96 80.01) (xy 182.88 80.01)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "9f64b709-2bfb-49c6-811b-7ac589b6833c")
+	)
+	(wire
+		(pts
 			(xy 177.8 33.02) (xy 177.8 31.75)
 		)
 		(stroke
@@ -2436,6 +2542,16 @@
 			(type default)
 		)
 		(uuid "b36bf444-b238-40a2-977a-5e4433ec8e48")
+	)
+	(wire
+		(pts
+			(xy 176.53 76.2) (xy 176.53 77.47)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "bbfbe7fd-4ac3-4802-8c22-b20e789817b7")
 	)
 	(wire
 		(pts
@@ -2486,6 +2602,16 @@
 			(type default)
 		)
 		(uuid "c70993fe-e6a0-4a46-9b60-a65d813d177f")
+	)
+	(wire
+		(pts
+			(xy 182.88 80.01) (xy 182.88 78.74)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "cce9101d-d114-46a4-b3eb-4ddf256de62e")
 	)
 	(wire
 		(pts
@@ -4838,10 +4964,9 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(fields_autoplaced yes)
 		(uuid "3215e11c-aa60-43e6-8a24-7d19fb3d5ff0")
-		(property "Reference" "U4"
-			(at 203.2 64.7699 0)
+		(property "Reference" "TEMP_INT"
+			(at 203.962 68.58 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4899,7 +5024,74 @@
 		(instances
 			(project ""
 				(path "/cfd0b8a8-74a1-487b-95ef-a5983af16f57"
-					(reference "U4")
+					(reference "TEMP_INT")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:GND")
+		(at 176.53 80.01 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "3300bd50-f5c8-4c94-bc39-ddc6b6d0f8d3")
+		(property "Reference" "#PWR014"
+			(at 176.53 86.36 0)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "GND"
+			(at 176.53 85.09 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 176.53 80.01 0)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 176.53 80.01 0)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 176.53 80.01 0)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "41abb00e-80ad-4e7b-bf86-e7be68fcf022")
+		)
+		(instances
+			(project "Fenix"
+				(path "/cfd0b8a8-74a1-487b-95ef-a5983af16f57"
+					(reference "#PWR014")
 					(unit 1)
 				)
 			)
@@ -4967,6 +5159,73 @@
 			(project "Fenix"
 				(path "/cfd0b8a8-74a1-487b-95ef-a5983af16f57"
 					(reference "#PWR06")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:+3V3")
+		(at 176.53 76.2 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "4cab7378-c7cc-4703-bf3c-3cacc8367c1e")
+		(property "Reference" "#PWR013"
+			(at 176.53 80.01 0)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "+3V3"
+			(at 176.53 71.12 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 176.53 76.2 0)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 176.53 76.2 0)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"+3V3\""
+			(at 176.53 76.2 0)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "02c6ca56-5032-4a3f-97e5-947340a1f24a")
+		)
+		(instances
+			(project "Fenix"
+				(path "/cfd0b8a8-74a1-487b-95ef-a5983af16f57"
+					(reference "#PWR013")
 					(unit 1)
 				)
 			)
@@ -5731,6 +5990,81 @@
 			(project ""
 				(path "/cfd0b8a8-74a1-487b-95ef-a5983af16f57"
 					(reference "#PWR04")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Parts:GY-SHT31-D")
+		(at 195.58 81.28 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "a9fa7d04-d21d-4774-9871-7f9c9aec37e2")
+		(property "Reference" "TEMP_EXT"
+			(at 203.708 85.852 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" ""
+			(at 190.5 76.2 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Parts:GY-SHT31-D"
+			(at 190.5 76.2 0)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" "https://sensirion.com/media/documents/213E6A3B/63A5A569/Datasheet_SHT3x_DIS.pdf"
+			(at 190.754 88.138 0)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" ""
+			(at 190.5 76.2 0)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "01"
+			(uuid "366421e7-2a0f-4b20-a529-cb487792d541")
+		)
+		(pin "02"
+			(uuid "c3b1d197-4a47-42c1-8ea9-a89aca83d7d2")
+		)
+		(pin "03"
+			(uuid "a65716cc-c7e3-47c8-8a08-010015314d90")
+		)
+		(pin "04"
+			(uuid "786ef3ac-c7cc-4e8a-b4fb-b891c005f6fd")
+		)
+		(instances
+			(project "Fenix"
+				(path "/cfd0b8a8-74a1-487b-95ef-a5983af16f57"
+					(reference "TEMP_EXT")
 					(unit 1)
 				)
 			)

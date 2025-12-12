@@ -1,4 +1,4 @@
-26802488050300517
+26813075801669356
 Audio_Module
 Reverb_BTDR-1H
 Digital Reverberation Unit, http://www.belton.co.kr/inc/downfile.php?seq=17&file=pdf (footprint from http://www.uk-electronic.de/PDF/BTDR-1.pdf)
@@ -92725,6 +92725,48 @@ Panelization
 MouseBite-Slot_2.54x5.08mm_on-edge_D0.5mm_P0.85mm_5h_Trace
 Break slot 2.54mm, standard: L=5.08mm, holes on-edge: acceptable, room for traces
 mousebite stamp slot break tab 2mm edge on-edge
+0
+0
+0
+Parts
+Adafruit_BNO055
+
+
+0
+10
+10
+Parts
+Adafruit_GPSFeather
+Common footprint for the Adafruit Feather series of boards, https://learn.adafruit.com/adafruit-feather/feather-specification
+Adafruit Feather
+0
+28
+28
+Parts
+Adafruit_PCA9685
+
+
+0
+12
+12
+Parts
+GY-SHT31-D
+
+
+0
+4
+4
+Parts
+LORA32_V4
+
+
+0
+36
+36
+Parts
+Untitled
+
+
 0
 0
 0
