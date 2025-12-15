@@ -627,7 +627,7 @@
         "uuid": "cfd0b8a8-74a1-487b-95ef-a5983af16f57"
       }
     ],
-    "used_designators": "#PWR13-14,U6"
+    "used_designators": "U4,TEMP_EXT1,#PWR10,#PWR15-18,TEMP_INT1,K1,J1-2"
   },
   "sheets": [
     [
