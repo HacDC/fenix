@@ -10,7 +10,7 @@ curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 
 ```shell
 cargo install espup
-espup install -f espidf.sh -t esp32s3
+espup install -f espidf.sh -t all
 source espidf.sh
 ```
 
