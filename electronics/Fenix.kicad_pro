@@ -628,7 +628,7 @@
         "uuid": "cfd0b8a8-74a1-487b-95ef-a5983af16f57"
       }
     ],
-    "used_designators": "U4,TEMP_EXT1,#PWR10,#PWR15-18,TEMP_INT1,K1,J1-2"
+    "used_designators": "U1-2,TEMP_EXT1,LoRa32_V1,J1-2,#PWR1-14,TEMP_INT1,uSD1,Servo_Controller1,Gyro1"
   },
   "sheets": [
     [
