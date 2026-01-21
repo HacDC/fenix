@@ -42,9 +42,9 @@ use lora_phy::{
     sx126x,
     LoRa,
     iv,
-    mod_params,
     RxMode
 };
+use lora_config;
 
 #[panic_handler]
 fn panic(_: &core::panic::PanicInfo) -> ! {
@@ -56,9 +56,6 @@ extern crate alloc;
 // This creates a default app-descriptor required by the esp-idf bootloader.
 // For more information see: <https://docs.espressif.com/projects/esp-idf/en/stable/esp32/api-reference/system/app_image_format.html#application-description>
 esp_bootloader_esp_idf::esp_app_desc!();
-
-// You can use https://meshtastic.org/docs/overview/radio-settings/
-const LORA_FREQUENCY_IN_HZ: u32 = 906875000; // US Slot 20
 
 static SPI_BUS: static_cell::StaticCell<Mutex<CriticalSectionRawMutex, Spi<'static, esp_hal::Async>>> =
     static_cell::StaticCell::new();
@@ -113,23 +110,16 @@ async fn main(spawner: Spawner) -> ! {
     let spi_device = SpiDevice::new(spi_bus, nss);
 
     // Initialize LoRa Radio
-    let sx12_config = sx126x::Config {
-        chip: sx126x::Sx1262,
-        tcxo_ctrl: Some(sx126x::TcxoCtrlVoltage::Ctrl1V7),
-        use_dcdc: false,
-        rx_boost: true
-    };
     let interface_variant = iv::GenericSx126xInterfaceVariant::new(rst, dio1, busy, None, None).unwrap();
-    let mut lora = LoRa::new(sx126x::Sx126x::new(spi_device, interface_variant, sx12_config), false, Delay)
+    let mut lora = LoRa::new(sx126x::Sx126x::new(spi_device, interface_variant, lora_config::RADIO_CONFIG), false, Delay)
         .await
         .unwrap();
-    let mut rx_buffer = [0u8; 255];
     let modulation_config = {
         match lora.create_modulation_params(
-            mod_params::SpreadingFactor::_11,
-            mod_params::Bandwidth::_250KHz,
-            mod_params::CodingRate::_4_5,
-            LORA_FREQUENCY_IN_HZ
+            lora_config::MODULATION_CONFIG.spreading_factor,
+            lora_config::MODULATION_CONFIG.bandwidth,
+            lora_config::MODULATION_CONFIG.coding_rate,
+            lora_config::FREQUENCY
         ) {
             Ok(config) => config,
             Err(e) => {
@@ -139,11 +129,11 @@ async fn main(spawner: Spawner) -> ! {
     };
     let rx_packet_config = {
         match lora.create_rx_packet_params(
-            16,                     // Preamble Length
-            true,                   // Implicit Header
-            rx_buffer.len() as u8,
-            false,                   // CRC Disabled
-            false,                  // Almost certainly don't want IQ inversion
+            lora_config::PACKET_CONFIG.preamble,         // Preamble Length
+            lora_config::PACKET_CONFIG.implicit_header,  // Implicit Header
+            lora_config::PACKET_CONFIG.length,           // Payload Length
+            lora_config::PACKET_CONFIG.crc,              // CRC Disabled
+            lora_config::PACKET_CONFIG.invert_iq,        // Almost certainly don't want IQ inversion
             &modulation_config
         ) {
             Ok(config) => config,
@@ -169,7 +159,7 @@ async fn main(spawner: Spawner) -> ! {
         // Auto-generated example loop code
         // info!("Hello world!");
         // Timer::after(Duration::from_secs(1)).await;
-        rx_buffer = [0u8; 255];
+        let mut rx_buffer = [0u8; lora_config::PACKET_CONFIG.length as usize];
         match lora.rx(&rx_packet_config, &mut rx_buffer).await {
             Ok((rx_size, _rx_packet_status)) => {
                 info!(

@@ -1,0 +1,8 @@
+[package]
+name = "lora_config"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+esp-hal = "1.0.0"
+lora-phy = "3.0.1"

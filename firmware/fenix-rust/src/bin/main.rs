@@ -8,10 +8,43 @@
 #![deny(clippy::large_stack_frames)]
 
 use embassy_executor::Spawner;
-use embassy_time::{Duration, Timer};
-use esp_hal::clock::CpuClock;
-use esp_hal::timer::timg::TimerGroup;
+use embassy_time::{
+    Delay,
+    Duration,
+    Timer
+};
+use embassy_sync::{
+    mutex::Mutex,
+    blocking_mutex::raw::CriticalSectionRawMutex
+};
+use embassy_embedded_hal::shared_bus::asynch::spi::SpiDevice;
 use log::info;
+use esp_hal::{
+    clock::CpuClock,
+    timer::timg::TimerGroup,
+    gpio::{
+        OutputConfig,
+        InputConfig,
+        Input,
+        Output,
+        Level
+    },
+    spi::{
+        Mode,
+        master::{
+            Config,
+            Spi
+        },
+    },
+    time::Rate,
+};
+use lora_phy::{
+    sx126x,
+    LoRa,
+    iv
+};
+
+use lora_config;
 
 #[panic_handler]
 fn panic(_: &core::panic::PanicInfo) -> ! {
@@ -23,6 +56,9 @@ extern crate alloc;
 // This creates a default app-descriptor required by the esp-idf bootloader.
 // For more information see: <https://docs.espressif.com/projects/esp-idf/en/stable/esp32/api-reference/system/app_image_format.html#application-description>
 esp_bootloader_esp_idf::esp_app_desc!();
+
+static SPI_BUS: static_cell::StaticCell<Mutex<CriticalSectionRawMutex, Spi<'static, esp_hal::Async>>> =
+    static_cell::StaticCell::new();
 
 #[allow(
     clippy::large_stack_frames,
@@ -49,12 +85,101 @@ async fn main(spawner: Spawner) -> ! {
         esp_radio::wifi::new(&radio_init, peripherals.WIFI, Default::default())
             .expect("Failed to initialize Wi-Fi controller");
 
+    // Initialize LoRa radio
+    let nss = Output::new(peripherals.GPIO8, Level::High, OutputConfig::default());
+    let sclk = peripherals.GPIO9;
+    let pico = peripherals.GPIO10;
+    let poci = peripherals.GPIO11;
+    let rst = Output::new(peripherals.GPIO12, Level::Low, OutputConfig::default());
+    let dio1 = Input::new(peripherals.GPIO14, InputConfig::default());
+    let busy = Input::new(peripherals.GPIO13, InputConfig::default());
+    let spi = Spi::new(
+        peripherals.SPI2,
+        Config::default()
+            .with_frequency(Rate::from_khz(100))
+            .with_mode(Mode::_0),
+    )
+    .unwrap()
+    .with_sck(sclk)
+    .with_mosi(pico)
+    .with_miso(poci)
+    .into_async();
+
+    // Initialize Static SPI Bus
+    let spi_bus = SPI_BUS.init(Mutex::new(spi));
+    let spi_device = SpiDevice::new(spi_bus, nss);
+
+    // Initialize LoRa Radio
+    let interface_variant = iv::GenericSx126xInterfaceVariant::new(rst, dio1, busy, None, None).unwrap();
+    let mut lora = LoRa::new(sx126x::Sx126x::new(spi_device, interface_variant, lora_config::RADIO_CONFIG), false, Delay)
+        .await
+        .unwrap();
+    let mut rx_buffer = [0u8; lora_config::PACKET_CONFIG.length as usize];
+    let modulation_config = {
+        match lora.create_modulation_params(
+            lora_config::MODULATION_CONFIG.spreading_factor,
+            lora_config::MODULATION_CONFIG.bandwidth,
+            lora_config::MODULATION_CONFIG.coding_rate,
+            lora_config::FREQUENCY,
+        ) {
+            Ok(config) => config,
+            Err(e) => {
+                panic!("Failed to create modulation params: {:?}", e);
+            }
+        }
+    };
+    let mut tx_packet_config = {
+        match lora.create_tx_packet_params(
+            lora_config::PACKET_CONFIG.preamble,
+            lora_config::PACKET_CONFIG.implicit_header,
+            lora_config::PACKET_CONFIG.crc,
+            lora_config::PACKET_CONFIG.invert_iq,
+            &modulation_config
+        ) {
+            Ok(config) => config,
+            Err(e) => {
+                panic!("Failed to create tx packet params: {:?}", e);
+            }
+        }
+    };
+    // let tx_buffer = b"dasdjjdjksjdfhs";
+
     // TODO: Spawn some tasks
     let _ = spawner;
 
     loop {
-        info!("Hello world!");
-        Timer::after(Duration::from_secs(1)).await;
+        let message = b"Be gay, kill  nazis!";
+        rx_buffer[..message.len()].copy_from_slice(message);
+        match lora.prepare_for_tx(
+            &modulation_config,
+            &mut tx_packet_config,
+            lora_config::LORA_POWER,
+            &rx_buffer
+        ).await {
+            Ok(_) => {
+                info!("LoRa radio initialized for TX!");
+            }
+            Err(e) => {
+                panic!("Failed to prepare LoRa radio for TX: {:?}", e);
+            }
+        }
+        match lora.tx().await {
+            Ok(_) => {
+                info!("LoRa TX successful!");
+            }
+            Err(e) => {
+                panic!("LoRa TX failed: {:?}", e);
+            }
+        }
+        match lora.sleep(true).await {
+            Ok(_) => {
+                info!("LoRa radio put to sleep!");
+            }
+            Err(e) => {
+                panic!("Failed to put LoRa radio to sleep: {:?}", e);
+            }
+        }
+        Timer::after(Duration::from_secs(5)).await;
     }
 
     // for inspiration have a look at the examples at https://github.com/esp-rs/esp-hal/tree/esp-hal-v1.0.0/examples
