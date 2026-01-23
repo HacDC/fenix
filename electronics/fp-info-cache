@@ -1,4 +1,4 @@
-27266778807745185
+27286313638234051
 Audio_Module
 Reverb_BTDR-1H
 Digital Reverberation Unit, http://www.belton.co.kr/inc/downfile.php?seq=17&file=pdf (footprint from http://www.uk-electronic.de/PDF/BTDR-1.pdf)
@@ -58534,6 +58534,13 @@ DCDC SMD TRACO TMR-1SM
 7
 7
 Converter_DCDC
+Converter_DCDC_TRACO_TMR-2xxxxWI_THT
+https://www.tracopower.com/products/tmr2wi.pdf
+DCDC-Converter TRACO TMRxxxxWI Single/Dual_output
+0
+7
+7
+Converter_DCDC
 Converter_DCDC_TRACO_TMR2-xxxxWI_THT
 DCDC-Converter, TRACO, TMR2-xxxxWI, 2W, Rev. October 7. 2025, https://www.tracopower.com/products/tmr2wi.pdf, generated with kicad-footprint-generator StandardBox_generator.py
 DCDC-Converter TRACO THT SIP-9 2W TMR2WI
@@ -61690,6 +61697,13 @@ ERM19264 Graphics Display 192x64
 0
 20
 20
+Display
+ER_OLEDM0.91_1x-I2C
+SSD1306 OLED module, 0.91 inch, 128x32, I2C (https://www.buydisplay.com/download/manual/ER-OLEDM0.91-1_Datasheet.pdf)
+EastRising
+0
+4
+4
 Display
 HDSM-441B_HDSM-443B
 2 Digit 7 segemnt blue LED, right hand decimal, https://docs.broadcom.com/docs/AV02-1589EN
@@ -79590,6 +79604,13 @@ DFN package size 1006 3 pins
 3
 3
 Package_DFN_QFN
+Diodes_UDFN-10_1.0x2.5mm_P0.5mm
+U-DFN2510-10 package used by Diodes Incorporated (https://www.diodes.com/assets/Package-Files/U-DFN2510-10-Type-CJ.pdf)
+UDFN-10 U-DFN2510-10 Diodes
+0
+10
+10
+Package_DFN_QFN
 Diodes_UDFN-10_1x2.5mm_P0.5mm
 Diodes  UDFN, 10 Pin (https://www.diodes.com/assets/Package-Files/U-DFN2510-10-Type-CJ.pdf), generated with kicad-footprint-generator ipc_noLead_generator.py
 Diodes UDFN NoLead Diodes_CJ Diodes_U-DFN2510-10
@@ -83831,6 +83852,13 @@ VQFN NoLead
 0
 91
 65
+Package_DFN_QFN
+VQFN-68-1EP_8x8mm_P0.4mm_EP4.3x4.3mm
+VQFN, 68 Pin (https://ftdichip.com/wp-content/uploads/2025/09/DS_FT2233HP.pdf#page=49), generated with kicad-footprint-generator ipc_noLead_generator.py
+VQFN NoLead
+0
+78
+69
 Package_DFN_QFN
 VQFN-100-1EP_12x12mm_P0.4mm_EP8x8mm
 VQFN, 100 Pin (https://ww1.microchip.com/downloads/aemDocuments/documents/UNG/ProductDocuments/DataSheets/USB7206C-Data-Sheet-DS00003850.pdf), generated with kicad-footprint-generator ipc_noLead_generator.py
@@ -88404,8 +88432,8 @@ MSOP SO
 11
 Package_SO
 MSOP-10_3x3mm_P0.5mm
-MSOP, 10 Pin (https://www.jedec.org/system/files/docs/mo-187F.pdf variant BA), generated with kicad-footprint-generator ipc_gullwing_generator.py
-MSOP SO Texas_DGS0010A
+MSOP, 10 Pin (JEDEC MO-187 variation BA, 0.85mm body thickness, https://www.jedec.org/system/files/docs/mo-187F.pdf), generated with kicad-footprint-generator ipc_gullwing_generator.py
+MSOP SO TSSOP-10_3x3mm_P0.5mm
 0
 10
 10
@@ -89321,8 +89349,8 @@ SSOP SO
 14
 Package_SO
 SSOP-16_3.9x4.9mm_P0.635mm
-SSOP16: plastic shrink small outline package; 16 leads; body width 3.9 mm; lead pitch 0.635; (see NXP SSOP-TSSOP-VSO-REFLOW.pdf and sot519-1_po.pdf)
-SSOP 0.635
+SSOP, 16 Pin (https://www.nxp.com/docs/en/package-information/SOT519-1.pdf#page=2), generated with kicad-footprint-generator ipc_gullwing_generator.py
+SSOP SO NXP_SOT519-1
 0
 16
 16
@@ -89720,8 +89748,8 @@ TSSOP SO
 8
 Package_SO
 TSSOP-10_3x3mm_P0.5mm
-TSSOP10: plastic thin shrink small outline package; 10 leads; body width 3 mm; (see NXP SSOP-TSSOP-VSO-REFLOW.pdf and sot552-1_po.pdf)
-SSOP 0.5
+TSSOP, 10 Pin (https://www.ti.com/lit/ml/mpds035c/mpds035c.pdf, https://www.ti.com/lit/ds/symlink/ads1115.pdf#page=50, https://www.nxp.com/docs/en/package-information/SOT552-1.pdf), generated with kicad-footprint-generator ipc_gullwing_generator.py
+TSSOP SO Texas_DGS0010A Texas_VSSOP-10 NXP_SOT552-1 MSOP-10_3x3mm_P0.5mm VSSOP-10_3x3mm_P0.5mm
 0
 10
 10
@@ -91434,6 +91462,13 @@ SOT TO_SOT_SMD SC8
 8
 8
 Package_TO_SOT_SMD
+SC-70-8_Handsoldering
+SC70-8, Handsoldering
+SC70-8 Handsoldering
+0
+8
+8
+Package_TO_SOT_SMD
 SC-74-6_1.55x2.9mm_P0.95mm
 SC-74, 6 Pin (https://www.jeita.or.jp/japanese/standard/book/ED-7500B/#target/page_no=39), generated with kicad-footprint-generator ipc_gullwing_generator.py
 SC-74 TO_SOT_SMD
@@ -91658,9 +91693,23 @@ SOT TO_SOT_SMD SC-70 SOT-323
 3
 3
 Package_TO_SOT_SMD
+SOT-323_SC-70_Handsoldering
+SOT-323, SC-70 Handsoldering
+SOT-323 SC-70 Handsoldering
+0
+3
+3
+Package_TO_SOT_SMD
 SOT-343_SC-70-4
 SOT, 4 Pin (https://www.tme.eu/Document/ced3461ed31ea70a3c416fb648e0cde7/APE8865-3.pdf#page=9), generated with kicad-footprint-generator ipc_gullwing_generator.py
 SOT TO_SOT_SMD SOT-343 SC-70-4
+0
+4
+4
+Package_TO_SOT_SMD
+SOT-343_SC-70-4_Handsoldering
+SOT-343, SC-70-4, Handsoldering
+SOT-343 SC-70-4 Handsoldering
 0
 4
 4
@@ -91672,9 +91721,23 @@ SOT TO_SOT_SMD SC-88A SOT-353 SC-70-5
 5
 5
 Package_TO_SOT_SMD
+SOT-353_SC-70-5_Handsoldering
+SOT-353, SC-70-5, Handsoldering
+SOT-353 SC-70-5 Handsoldering
+0
+5
+5
+Package_TO_SOT_SMD
 SOT-363_SC-70-6
 SOT, 6 Pin (https://home.jeita.or.jp/tsc/std-pdf/ED-7500A.pdf#page=170, JEDEC MO-203, variant AB, https://www.jedec.org/document_search?search_api_views_fulltext=MO-203), generated with kicad-footprint-generator ipc_gullwing_generator.py
 SOT TO_SOT_SMD SC-88 SOT-363 SC-70-6 US6 UMT6 S-Mini6 TSSOP6
+0
+6
+6
+Package_TO_SOT_SMD
+SOT-363_SC-70-6_Handsoldering
+SOT-363, SC-70-6, SC-88, Handsoldering
+SOT-363 SC-70-6 SC-88 Handsoldering
 0
 6
 6
