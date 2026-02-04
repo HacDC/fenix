@@ -26,12 +26,3 @@ uses. This may or may not be the case in practice:
 
 2. Any time you open a new terminal window, you will need to run
    `nix develop`.
-
-# Install Firmware
-
-```shell
-cd firmware
-cargo build
-cargo run --bin fenix
-cargo run --bin fraublucher
-```
