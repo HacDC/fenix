@@ -1,5 +1,5 @@
-# Frau Blucher
+This crate produces two binaries:
 
-*Franken's Plot Device*
+* fenix: The firmware for the spaceblimp. Designed around the V4 LoRa32.
 
-This is the rust firmware for the ground station for the spaceblimp. Designed around the V3 LoRa32 similar to the spaceblimp's V4.
+* fraublucher: The firmware for the ground station. Designed around the V3 LoRa32.
