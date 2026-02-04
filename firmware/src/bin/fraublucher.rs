@@ -44,7 +44,7 @@ use lora_phy::{
     iv,
     RxMode
 };
-use spaceblimp::lora_config;
+use spaceblimp::common::lora_config;
 
 #[panic_handler]
 fn panic(_: &core::panic::PanicInfo) -> ! {

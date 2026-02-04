@@ -6,4 +6,6 @@
     holding buffers for the duration of a data transfer."
 )]
 #![deny(clippy::large_stack_frames)]
-pub mod lora_config;
+pub mod common;
+pub mod fenix;
+pub mod fraublucher;
