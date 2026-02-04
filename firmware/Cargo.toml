@@ -1,16 +1,10 @@
 [package]
 edition      = "2024"
-name         = "fenix-rust"
+name         = "spaceblimp"
 rust-version = "1.88"
 version      = "0.1.0"
 
-[[bin]]
-name = "fenix-rust"
-path = "./src/bin/main.rs"
-
 [dependencies]
-lora_config = { path = "../lib/lora_config" }
-
 esp-hal = { version = "~1.0", features = ["esp32s3", "log-04", "unstable"] }
 
 esp-rtos = { version = "0.2.0", features = [

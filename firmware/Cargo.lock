@@ -916,31 +916,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "fenix-rust"
-version = "0.1.0"
-dependencies = [
- "critical-section",
- "embassy-embedded-hal",
- "embassy-executor",
- "embassy-net",
- "embassy-sync 0.7.2",
- "embassy-time",
- "embedded-io 0.7.1",
- "embedded-io-async 0.7.0",
- "esp-alloc",
- "esp-bootloader-esp-idf",
- "esp-hal",
- "esp-println",
- "esp-radio",
- "esp-rtos",
- "log",
- "lora-phy",
- "lora_config",
- "smoltcp",
- "static_cell",
-]
-
-[[package]]
 name = "fnv"
 version = "1.0.7"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -1151,14 +1126,6 @@ dependencies = [
  "embedded-hal-async",
  "lora-modulation",
  "num-traits",
-]
-
-[[package]]
-name = "lora_config"
-version = "0.1.0"
-dependencies = [
- "esp-hal",
- "lora-phy",
 ]
 
 [[package]]
@@ -1492,6 +1459,30 @@ name = "somni-parser"
 version = "0.2.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "a0f368519fc6c85fc1afdb769fb5a51123f6158013e143656e25a3485a0d401c"
+
+[[package]]
+name = "spaceblimp"
+version = "0.1.0"
+dependencies = [
+ "critical-section",
+ "embassy-embedded-hal",
+ "embassy-executor",
+ "embassy-net",
+ "embassy-sync 0.7.2",
+ "embassy-time",
+ "embedded-io 0.7.1",
+ "embedded-io-async 0.7.0",
+ "esp-alloc",
+ "esp-bootloader-esp-idf",
+ "esp-hal",
+ "esp-println",
+ "esp-radio",
+ "esp-rtos",
+ "log",
+ "lora-phy",
+ "smoltcp",
+ "static_cell",
+]
 
 [[package]]
 name = "stable_deref_trait"

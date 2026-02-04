@@ -15,6 +15,7 @@
         buildInputs = [
           pkgs.rustup
           pkgs.espup
+          pkgs.espflash
         ];
         shellHook = ''
           if ! [ -f espidf.sh ]; then
