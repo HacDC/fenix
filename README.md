@@ -30,7 +30,8 @@ uses. This may or may not be the case in practice:
 # Install Firmware
 
 ```shell
-cd firmware/fenix-rust
+cd firmware
 cargo build
-cargo flash
+cargo run --bin fenix
+cargo run --bin fraublucher
 ```
