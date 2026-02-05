@@ -1,5 +1,11 @@
 use embassy_embedded_hal::shared_bus::asynch::spi::SpiDevice;
+use embassy_sync:: {
+    mutex::Mutex,
+    blocking_mutex::raw::CriticalSectionRawMutex
+};
+use embassy_time::Delay;
 use esp_hal:: {
+    Async,
     gpio:: {
         Input,
         InputConfig,
@@ -7,26 +13,49 @@ use esp_hal:: {
         Output,
         OutputConfig
     },
+    peripherals::Peripherals,
     spi:: {
-        master:: {
+        Mode, master:: {
             Config,
             Spi
-        },
-        Mode
-    }
+        }
+    },
+    time::Rate
 };
 use lora_phy:: {
-    iv,
+    iv:: {
+        GenericSx126xInterfaceVariant
+    },
     LoRa,
-    sx126x
+    mod_params:: {
+        ModulationParams,
+        PacketParams
+    },
+    sx126x:: {
+        Sx126x,
+        Sx1262
+    }
 };
+use static_cell::StaticCell;
 
-// pub fn add(left: u64, right: u64) -> u64 {
-//     left + right
-// }
+use crate::common::lora_config;
 
-impl FenixLoRa {
-    pub fn new() -> Self {
+// TODO: Relocate for both Fenix and Fraublucher to use
+// TODO: Implement TX/RX functions
+// TODO: Find solution for radio async timing
+
+pub struct FenixLoRa<'a>{
+    rx_buffer: [u8; lora_config::PACKET_CONFIG.length as usize],
+    tx_buffer: [u8; lora_config::PACKET_CONFIG.length as usize],
+    radio: LoRa<Sx126x<SpiDevice<'a, CriticalSectionRawMutex, Spi<'static, Async>, Output<'a>>, GenericSx126xInterfaceVariant<Output<'a>, Input<'a>>, Sx1262>, Delay>,
+    modulation_config: ModulationParams,
+    tx_packet_config: PacketParams,
+    rx_packet_config: PacketParams,
+
+}
+
+impl<'a> FenixLoRa<'a> {
+    pub async fn new(&mut self, peripherals: Peripherals, spi_bus: &'static StaticCell<Mutex<CriticalSectionRawMutex, Spi<'static, Async>>>) {
         let radio_init = esp_radio::init().expect("Failed to initialize Wi-Fi/BLE controller");
         let (mut _wifi_controller, _interfaces) =
             esp_radio::wifi::new(&radio_init, peripherals.WIFI, Default::default())
@@ -53,17 +82,16 @@ impl FenixLoRa {
         .into_async();
 
         // Initialize Static SPI Bus
-        let spi_bus = SPI_BUS.init(Mutex::new(spi));
-        let spi_device = SpiDevice::new(spi_bus, nss);
+        let radio_spi_bus = spi_bus.init(Mutex::new(spi));
+        let spi_device = SpiDevice::new(radio_spi_bus, nss);
 
         // Initialize LoRa Radio
-        let interface_variant = iv::GenericSx126xInterfaceVariant::new(rst, dio1, busy, None, None).unwrap();
-        let mut lora = LoRa::new(sx126x::Sx126x::new(spi_device, interface_variant, lora_config::RADIO_CONFIG), false, Delay)
+        let interface_variant = GenericSx126xInterfaceVariant::new(rst, dio1, busy, None, None).unwrap();
+        self.radio = LoRa::new(Sx126x::new(spi_device, interface_variant, lora_config::RADIO_CONFIG), false, Delay)
             .await
             .unwrap();
-        let mut rx_buffer = [0u8; lora_config::PACKET_CONFIG.length as usize];
-        let modulation_config = {
-            match lora.create_modulation_params(
+        self.modulation_config = {
+            match self.radio.create_modulation_params(
                 lora_config::MODULATION_CONFIG.spreading_factor,
                 lora_config::MODULATION_CONFIG.bandwidth,
                 lora_config::MODULATION_CONFIG.coding_rate,
@@ -75,13 +103,13 @@ impl FenixLoRa {
                 }
             }
         };
-        let mut tx_packet_config = {
-            match lora.create_tx_packet_params(
+        self.tx_packet_config = {
+            match self.radio.create_tx_packet_params(
                 lora_config::PACKET_CONFIG.preamble,
                 lora_config::PACKET_CONFIG.implicit_header,
                 lora_config::PACKET_CONFIG.crc,
                 lora_config::PACKET_CONFIG.invert_iq,
-                &modulation_config
+                &self.modulation_config
             ) {
                 Ok(config) => config,
                 Err(e) => {
@@ -89,17 +117,59 @@ impl FenixLoRa {
                 }
             }
         };
+        self.rx_packet_config = {
+            match self.radio.create_rx_packet_params(
+                lora_config::PACKET_CONFIG.preamble,         // Preamble Length
+                lora_config::PACKET_CONFIG.implicit_header,  // Implicit Header
+                lora_config::PACKET_CONFIG.length,           // Payload Length
+                lora_config::PACKET_CONFIG.crc,              // CRC Disabled
+                lora_config::PACKET_CONFIG.invert_iq,        // Almost certainly don't want IQ inversion
+                &self.modulation_config
+            ) {
+                Ok(config) => config,
+                Err(e) => {
+                    panic!("Failed to create rx packet params: {:?}", e);
+                }
+            }
+        };
+    }
+
+    pub async fn transmit(){
+        // let message = b"Be gay, kill  nazis!";
+        // rx_buffer[..message.len()].copy_from_slice(message);
+        // match lora.prepare_for_tx(
+        //     &modulation_config,
+        //     &mut tx_packet_config,
+        //     lora_config::LORA_POWER,
+        //     &rx_buffer
+        // ).await {
+        //     Ok(_) => {
+        //         info!("LoRa radio initialized for TX!");
+        //     }
+        //     Err(e) => {
+        //         panic!("Failed to prepare LoRa radio for TX: {:?}", e);
+        //     }
+        // }
+        // match lora.tx().await {
+        //     Ok(_) => {
+        //         info!("LoRa TX successful!");
+        //     }
+        //     Err(e) => {
+        //         panic!("LoRa TX failed: {:?}", e);
+        //     }
+        // }
+        // match lora.sleep(true).await {
+        //     Ok(_) => {
+        //         info!("LoRa radio put to sleep!");
+        //     }
+        //     Err(e) => {
+        //         panic!("Failed to put LoRa radio to sleep: {:?}", e);
+        //     }
+        // }
+    }
+
+    pub async fn receive(){
+
     }
 }
-    // let tx_buffer = b"dasdjjdjksjdfhs";
 
-// #[cfg(test)]
-// mod tests {
-//     use super::*;
-
-//     #[test]
-//     fn it_works() {
-//         let result = add(2, 2);
-//         assert_eq!(result, 4);
-//     }
-// }

@@ -9,7 +9,6 @@
 
 use embassy_executor::Spawner;
 use embassy_time::{
-    Delay,
     Duration,
     Timer
 };
@@ -17,34 +16,12 @@ use embassy_sync::{
     mutex::Mutex,
     blocking_mutex::raw::CriticalSectionRawMutex
 };
-use embassy_embedded_hal::shared_bus::asynch::spi::SpiDevice;
 use log::info;
 use esp_hal::{
     clock::CpuClock,
     timer::timg::TimerGroup,
-    gpio::{
-        OutputConfig,
-        InputConfig,
-        Input,
-        Output,
-        Level
-    },
-    spi::{
-        Mode,
-        master::{
-            Config,
-            Spi
-        },
-    },
-    time::Rate,
+    spi::master::Spi,
 };
-use lora_phy::{
-    sx126x,
-    LoRa,
-    iv
-};
-
-use spaceblimp::common::lora_config;
 
 #[panic_handler]
 fn panic(_: &core::panic::PanicInfo) -> ! {
@@ -86,37 +63,7 @@ async fn main(spawner: Spawner) -> ! {
     let _ = spawner;
 
     loop {
-        // let message = b"Be gay, kill  nazis!";
-        // rx_buffer[..message.len()].copy_from_slice(message);
-        // match lora.prepare_for_tx(
-        //     &modulation_config,
-        //     &mut tx_packet_config,
-        //     lora_config::LORA_POWER,
-        //     &rx_buffer
-        // ).await {
-        //     Ok(_) => {
-        //         info!("LoRa radio initialized for TX!");
-        //     }
-        //     Err(e) => {
-        //         panic!("Failed to prepare LoRa radio for TX: {:?}", e);
-        //     }
-        // }
-        // match lora.tx().await {
-        //     Ok(_) => {
-        //         info!("LoRa TX successful!");
-        //     }
-        //     Err(e) => {
-        //         panic!("LoRa TX failed: {:?}", e);
-        //     }
-        // }
-        // match lora.sleep(true).await {
-        //     Ok(_) => {
-        //         info!("LoRa radio put to sleep!");
-        //     }
-        //     Err(e) => {
-        //         panic!("Failed to put LoRa radio to sleep: {:?}", e);
-        //     }
-        // }
+
         Timer::after(Duration::from_secs(5)).await;
     }
 
