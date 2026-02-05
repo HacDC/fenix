@@ -439,6 +439,7 @@
       "duplicate_sheet_names": "error",
       "endpoint_off_grid": "warning",
       "extra_units": "error",
+      "field_name_whitespace": "warning",
       "footprint_filter": "ignore",
       "footprint_link_issues": "warning",
       "four_way_junction": "ignore",
@@ -641,7 +642,7 @@
         "uuid": "cfd0b8a8-74a1-487b-95ef-a5983af16f57"
       }
     ],
-    "used_designators": "J3_ADR2,#PWR18,J4_SRV_EN1",
+    "used_designators": "#PWR19,J1,J4_SRV_EN2",
     "variants": []
   },
   "sheets": [
