@@ -22,6 +22,7 @@ use esp_hal:: {
     },
     time::Rate
 };
+use log::info;
 use lora_phy:: {
     iv:: {
         GenericSx126xInterfaceVariant
@@ -31,6 +32,7 @@ use lora_phy:: {
         ModulationParams,
         PacketParams
     },
+    RxMode,
     sx126x:: {
         Sx126x,
         Sx1262
@@ -134,31 +136,30 @@ impl<'a> FenixLoRa<'a> {
         };
     }
 
-    pub async fn transmit(){
-        // let message = b"Be gay, kill  nazis!";
-        // rx_buffer[..message.len()].copy_from_slice(message);
-        // match lora.prepare_for_tx(
-        //     &modulation_config,
-        //     &mut tx_packet_config,
-        //     lora_config::LORA_POWER,
-        //     &rx_buffer
-        // ).await {
-        //     Ok(_) => {
-        //         info!("LoRa radio initialized for TX!");
-        //     }
-        //     Err(e) => {
-        //         panic!("Failed to prepare LoRa radio for TX: {:?}", e);
-        //     }
-        // }
-        // match lora.tx().await {
-        //     Ok(_) => {
-        //         info!("LoRa TX successful!");
-        //     }
-        //     Err(e) => {
-        //         panic!("LoRa TX failed: {:?}", e);
-        //     }
-        // }
-        // match lora.sleep(true).await {
+    pub async fn transmit<'b>(&mut self, payload: &'b [u8]) {
+        self.rx_buffer[..payload.len()].copy_from_slice(payload);
+        match self.radio.prepare_for_tx(
+            &self.modulation_config,
+            &mut self.tx_packet_config,
+            lora_config::LORA_POWER,
+            &self.rx_buffer
+        ).await {
+            Ok(_) => {
+                info!("LoRa radio initialized for TX!");
+            }
+            Err(e) => {
+                panic!("Failed to prepare LoRa radio for TX: {:?}", e);
+            }
+        }
+        match self.radio.tx().await {
+            Ok(_) => {
+                info!("LoRa TX successful!");
+            }
+            Err(e) => {
+                panic!("LoRa TX failed: {:?}", e);
+            }
+        }
+        // match self.radio.sleep(true).await {
         //     Ok(_) => {
         //         info!("LoRa radio put to sleep!");
         //     }
@@ -166,10 +167,31 @@ impl<'a> FenixLoRa<'a> {
         //         panic!("Failed to put LoRa radio to sleep: {:?}", e);
         //     }
         // }
+
     }
 
-    pub async fn receive(){
-
+    pub async fn receive(&mut self) {
+        // TODO: Should add this to new() and leave for continuous listen, then interrupt with tx fun
+        match self.radio.prepare_for_rx(RxMode::Continuous, &self.modulation_config, &self.rx_packet_config).await {
+            Ok(_) => {
+                info!("LoRa radio initialized for RX!");
+            }
+            Err(e) => {
+                panic!("Failed to prepare LoRa radio for RX: {:?}", e);
+            }
+        }
+        match self.radio.rx(&self.rx_packet_config, &mut self.rx_buffer).await {
+            Ok((rx_size, _rx_packet_status)) => {
+                info!(
+                    "Received packet: size={} data={:x?}",
+                    rx_size,
+                    &self.rx_buffer[..rx_size as usize]
+                );
+            }
+            Err(e) => {
+                info!("Failed to receive packet: {:?}", e);
+            }
+        }
     }
 }
 
