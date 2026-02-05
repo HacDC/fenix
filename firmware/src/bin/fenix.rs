@@ -80,105 +80,43 @@ async fn main(spawner: Spawner) -> ! {
 
     info!("Embassy initialized!");
 
-    let radio_init = esp_radio::init().expect("Failed to initialize Wi-Fi/BLE controller");
-    let (mut _wifi_controller, _interfaces) =
-        esp_radio::wifi::new(&radio_init, peripherals.WIFI, Default::default())
-            .expect("Failed to initialize Wi-Fi controller");
 
-    // Initialize LoRa radio
-    let nss = Output::new(peripherals.GPIO8, Level::High, OutputConfig::default());
-    let sclk = peripherals.GPIO9;
-    let pico = peripherals.GPIO10;
-    let poci = peripherals.GPIO11;
-    let rst = Output::new(peripherals.GPIO12, Level::Low, OutputConfig::default());
-    let dio1 = Input::new(peripherals.GPIO14, InputConfig::default());
-    let busy = Input::new(peripherals.GPIO13, InputConfig::default());
-    let spi = Spi::new(
-        peripherals.SPI2,
-        Config::default()
-            .with_frequency(Rate::from_khz(100))
-            .with_mode(Mode::_0),
-    )
-    .unwrap()
-    .with_sck(sclk)
-    .with_mosi(pico)
-    .with_miso(poci)
-    .into_async();
-
-    // Initialize Static SPI Bus
-    let spi_bus = SPI_BUS.init(Mutex::new(spi));
-    let spi_device = SpiDevice::new(spi_bus, nss);
-
-    // Initialize LoRa Radio
-    let interface_variant = iv::GenericSx126xInterfaceVariant::new(rst, dio1, busy, None, None).unwrap();
-    let mut lora = LoRa::new(sx126x::Sx126x::new(spi_device, interface_variant, lora_config::RADIO_CONFIG), false, Delay)
-        .await
-        .unwrap();
-    let mut rx_buffer = [0u8; lora_config::PACKET_CONFIG.length as usize];
-    let modulation_config = {
-        match lora.create_modulation_params(
-            lora_config::MODULATION_CONFIG.spreading_factor,
-            lora_config::MODULATION_CONFIG.bandwidth,
-            lora_config::MODULATION_CONFIG.coding_rate,
-            lora_config::FREQUENCY,
-        ) {
-            Ok(config) => config,
-            Err(e) => {
-                panic!("Failed to create modulation params: {:?}", e);
-            }
-        }
-    };
-    let mut tx_packet_config = {
-        match lora.create_tx_packet_params(
-            lora_config::PACKET_CONFIG.preamble,
-            lora_config::PACKET_CONFIG.implicit_header,
-            lora_config::PACKET_CONFIG.crc,
-            lora_config::PACKET_CONFIG.invert_iq,
-            &modulation_config
-        ) {
-            Ok(config) => config,
-            Err(e) => {
-                panic!("Failed to create tx packet params: {:?}", e);
-            }
-        }
-    };
-    // let tx_buffer = b"dasdjjdjksjdfhs";
 
     // TODO: Spawn some tasks
     let _ = spawner;
 
     loop {
-        let message = b"Be gay, kill  nazis!";
-        rx_buffer[..message.len()].copy_from_slice(message);
-        match lora.prepare_for_tx(
-            &modulation_config,
-            &mut tx_packet_config,
-            lora_config::LORA_POWER,
-            &rx_buffer
-        ).await {
-            Ok(_) => {
-                info!("LoRa radio initialized for TX!");
-            }
-            Err(e) => {
-                panic!("Failed to prepare LoRa radio for TX: {:?}", e);
-            }
-        }
-        match lora.tx().await {
-            Ok(_) => {
-                info!("LoRa TX successful!");
-            }
-            Err(e) => {
-                panic!("LoRa TX failed: {:?}", e);
-            }
-        }
-        match lora.sleep(true).await {
-            Ok(_) => {
-                info!("LoRa radio put to sleep!");
-            }
-            Err(e) => {
-                panic!("Failed to put LoRa radio to sleep: {:?}", e);
-            }
-        }
+        // let message = b"Be gay, kill  nazis!";
+        // rx_buffer[..message.len()].copy_from_slice(message);
+        // match lora.prepare_for_tx(
+        //     &modulation_config,
+        //     &mut tx_packet_config,
+        //     lora_config::LORA_POWER,
+        //     &rx_buffer
+        // ).await {
+        //     Ok(_) => {
+        //         info!("LoRa radio initialized for TX!");
+        //     }
+        //     Err(e) => {
+        //         panic!("Failed to prepare LoRa radio for TX: {:?}", e);
+        //     }
+        // }
+        // match lora.tx().await {
+        //     Ok(_) => {
+        //         info!("LoRa TX successful!");
+        //     }
+        //     Err(e) => {
+        //         panic!("LoRa TX failed: {:?}", e);
+        //     }
+        // }
+        // match lora.sleep(true).await {
+        //     Ok(_) => {
+        //         info!("LoRa radio put to sleep!");
+        //     }
+        //     Err(e) => {
+        //         panic!("Failed to put LoRa radio to sleep: {:?}", e);
+        //     }
+        // }
         Timer::after(Duration::from_secs(5)).await;
     }
 

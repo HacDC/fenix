@@ -1,4 +1,8 @@
-// TODO: place fenix-specific modules here
-// pub mod foo;
-// pub mod bar;
-// pub mod baz;
+// place fenix-specific modules here
+pub mod fenix_aprs;
+pub mod fenix_beacon;
+pub mod fenix_gps;
+pub mod fenix_lora;
+pub mod fenix_sd;
+pub mod fenix_sensor;
+pub mod fenix_servo;
