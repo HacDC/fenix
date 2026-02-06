@@ -189,37 +189,25 @@ impl<'a> FenixLoRa<'a> {
 
     pub async fn receive(&mut self) {
         // TODO: Should add this to new() and leave for continuous listen, then interrupt with tx fun
-        match self
-            .radio
+        self.radio
             .prepare_for_rx(
                 RxMode::Continuous,
                 &self.modulation_config,
                 &self.rx_packet_config,
             )
             .await
-        {
-            Ok(_) => {
-                info!("LoRa radio initialized for RX!");
-            }
-            Err(e) => {
-                panic!("Failed to prepare LoRa radio for RX: {:?}", e);
-            }
-        }
-        match self
+            .unwrap();
+        info!("LoRa radio initialized for RX!");
+
+        let (rx_size, _rx_packet_status) = self
             .radio
             .rx(&self.rx_packet_config, &mut self.rx_buffer)
             .await
-        {
-            Ok((rx_size, _rx_packet_status)) => {
-                info!(
-                    "Received packet: size={} data={:x?}",
-                    rx_size,
-                    &self.rx_buffer[..rx_size as usize]
-                );
-            }
-            Err(e) => {
-                info!("Failed to receive packet: {:?}", e);
-            }
-        }
+            .unwrap();
+        info!(
+            "Received packet: size={} data={:x?}",
+            rx_size,
+            &self.rx_buffer[..rx_size as usize]
+        );
     }
 }
