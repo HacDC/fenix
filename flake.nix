@@ -20,9 +20,7 @@
         shellHook = ''
           if ! [ -f espidf.sh ]; then
             echo "Installing dependencies using rustup; this might take a while..."
-            # The purpose of `--log-level warn` is to hide the info log message
-            # where `espup` tells the user to `source espidf.sh`.
-            if ! espup install -f espidf.sh -t all --log-level warn; then
+            if ! espup install -f espidf.sh -t all; then
               echo "ERROR: Failed to install dependencies"
               exit 1
             fi
