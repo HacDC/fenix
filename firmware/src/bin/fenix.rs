@@ -8,20 +8,20 @@
 #![deny(clippy::large_stack_frames)]
 
 use embassy_executor::Spawner;
+use embassy_sync::{
+    blocking_mutex::raw::CriticalSectionRawMutex,
+    mutex::Mutex,
+};
 use embassy_time::{
     Duration,
-    Timer
+    Timer,
 };
-use embassy_sync::{
-    mutex::Mutex,
-    blocking_mutex::raw::CriticalSectionRawMutex
-};
-use log::info;
 use esp_hal::{
     clock::CpuClock,
-    timer::timg::TimerGroup,
     spi::master::Spi,
+    timer::timg::TimerGroup,
 };
+use log::info;
 
 #[panic_handler]
 fn panic(_: &core::panic::PanicInfo) -> ! {
@@ -34,8 +34,9 @@ extern crate alloc;
 // For more information see: <https://docs.espressif.com/projects/esp-idf/en/stable/esp32/api-reference/system/app_image_format.html#application-description>
 esp_bootloader_esp_idf::esp_app_desc!();
 
-static SPI_BUS: static_cell::StaticCell<Mutex<CriticalSectionRawMutex, Spi<'static, esp_hal::Async>>> =
-    static_cell::StaticCell::new();
+static SPI_BUS: static_cell::StaticCell<
+    Mutex<CriticalSectionRawMutex, Spi<'static, esp_hal::Async>>,
+> = static_cell::StaticCell::new();
 
 #[allow(
     clippy::large_stack_frames,
@@ -57,13 +58,10 @@ async fn main(spawner: Spawner) -> ! {
 
     info!("Embassy initialized!");
 
-
-
     // TODO: Spawn some tasks
     let _ = spawner;
 
     loop {
-
         Timer::after(Duration::from_secs(5)).await;
     }
 
