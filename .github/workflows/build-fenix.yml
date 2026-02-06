@@ -14,5 +14,5 @@ jobs:
           nix_path: nixpkgs=channel:nixos-stable
             # - run: nix-build
       - name: Build in nix shell
-        shell: 'nix develop --extra-experimental-features nix-command --extra-experimental-features flakes'
+        shell: 'nix develop --extra-experimental-features nix-command --extra-experimental-features flakes -c bash -e {0}'
         run: 'cd firmware; cargo build'
