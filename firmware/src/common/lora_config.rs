@@ -1,6 +1,6 @@
 use lora_phy::{
+    mod_params,
     sx126x,
-    mod_params
 };
 
 pub const FREQUENCY: u32 = 912000000;
