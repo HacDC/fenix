@@ -11,9 +11,9 @@ uses. This may or may not be the case in practice:
 
 * Ubuntu: works
 
-* MacOS: unknown
+* MacOS: Doesn't work: arm issue
 
-* Windows Subsystem for Linux: unknown
+* Windows Subsystem for Linux: Operational (at least with Ubuntu noble)
 
 * NixOS: Does not work (NixOS/nixpkgs#372653). Ivan is trying to find a
   workaround that we can use until the proper fix is merged
