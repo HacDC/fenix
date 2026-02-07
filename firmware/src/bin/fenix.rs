@@ -18,7 +18,10 @@ use embassy_time::{
 };
 use esp_hal::{
     clock::CpuClock,
-    spi::master::Spi,
+    i2c::master:: {
+        Config as I2cConfig,
+        I2c,
+    },
     timer::timg::TimerGroup,
 };
 use log::info;
@@ -34,9 +37,9 @@ extern crate alloc;
 // For more information see: <https://docs.espressif.com/projects/esp-idf/en/stable/esp32/api-reference/system/app_image_format.html#application-description>
 esp_bootloader_esp_idf::esp_app_desc!();
 
-static SPI_BUS: static_cell::StaticCell<
-    Mutex<CriticalSectionRawMutex, Spi<'static, esp_hal::Async>>,
-> = static_cell::StaticCell::new();
+// static SPI_BUS: static_cell::StaticCell<
+//     Mutex<CriticalSectionRawMutex, Spi<'static, esp_hal::Async>>,
+// > = static_cell::StaticCell::new();
 
 #[allow(
     clippy::large_stack_frames,
@@ -58,6 +61,11 @@ async fn main(spawner: Spawner) -> ! {
 
     info!("Embassy initialized!");
 
+    let i2c = I2c::new(peripherals.I2C0, I2cConfig::default())
+    .unwrap()
+    .with_scl(peripherals.GPIO48)
+    .with_sda(peripherals.GPIO47)
+    .into_async();
     // TODO: Spawn some tasks
     let _ = spawner;
 
