@@ -1,8 +1,6 @@
-use core:: {
-    str as String,
-};
+use core::str as String;
 use embedded_hal_bus::spi::ExclusiveDevice;
-use embedded_sdmmc:: {
+use embedded_sdmmc::{
     Directory,
     File,
     Mode as FileMode,
@@ -11,25 +9,25 @@ use embedded_sdmmc:: {
     Timestamp,
     Volume,
     VolumeIdx,
-    VolumeManager
+    VolumeManager,
 };
-use esp_hal:: {
-    Blocking,
+use esp_hal::{
     delay::Delay as EspDelay,
-    gpio:: {
+    gpio::{
         Level,
         Output,
-        OutputConfig
+        OutputConfig,
     },
     peripherals::Peripherals,
-    spi:: {
-        master:: {
+    spi::{
+        master::{
             Config as SpiConfig,
-            Spi as SpiMaster
+            Spi as SpiMaster,
         },
-        Mode
+        Mode,
     },
-    time::Rate
+    time::Rate,
+    Blocking,
 };
 use log::info;
 
@@ -50,23 +48,32 @@ impl TimeSource for DummyTimeSource {
 
 pub struct FenixSD<'d> {
     // volume_manager: VolumeManager<SdCard<ExclusiveDevice<SpiMaster<'d, Blocking>, Output<'d>, EspDelay>, EspDelay>, DummyTimeSource>,
-    file: File<'d, SdCard<ExclusiveDevice<SpiMaster<'d, Blocking>, Output<'d>, EspDelay>, EspDelay>, DummyTimeSource, 4, 4, 1>,
+    file: File<
+        'd,
+        SdCard<ExclusiveDevice<SpiMaster<'d, Blocking>, Output<'d>, EspDelay>, EspDelay>,
+        DummyTimeSource,
+        4,
+        4,
+        1,
+    >,
 }
-
 
 impl<'d> FenixSD<'d> {
     pub async fn new(peripherals: Peripherals) -> Self {
-        let spi_bus: SpiMaster<'d, Blocking> = SpiMaster::new(peripherals.SPI2,
+        let spi_bus: SpiMaster<'d, Blocking> = SpiMaster::new(
+            peripherals.SPI2,
             SpiConfig::default()
                 .with_frequency(Rate::from_khz(400))
-                .with_mode(Mode::_0)
+                .with_mode(Mode::_0),
         )
         .unwrap()
         .with_sck(peripherals.GPIO36)
         .with_mosi(peripherals.GPIO35)
         .with_miso(peripherals.GPIO37);
-        let sd_chip_select: Output<'d> = Output::new(peripherals.GPIO34, Level::High, OutputConfig::default());
-        let spi_device: ExclusiveDevice<SpiMaster<'d, Blocking>, Output<'d>, EspDelay> = ExclusiveDevice::new(spi_bus, sd_chip_select, EspDelay::new()).unwrap();
+        let sd_chip_select: Output<'d> =
+            Output::new(peripherals.GPIO34, Level::High, OutputConfig::default());
+        let spi_device: ExclusiveDevice<SpiMaster<'d, Blocking>, Output<'d>, EspDelay> =
+            ExclusiveDevice::new(spi_bus, sd_chip_select, EspDelay::new()).unwrap();
         // let spi_device = ExclusiveDevice::new(spi_bus, sd_chip_select, Delay);
         let sdcard = SdCard::new(spi_device, EspDelay::new());
         info!("SD Card initialized: {:?}", sdcard.num_bytes());
@@ -74,7 +81,12 @@ impl<'d> FenixSD<'d> {
 
         let mut volume = volume_manager.open_volume(VolumeIdx(0)).unwrap();
         let mut root = volume.open_root_dir().unwrap();
-        let mut file  = root.open_file_in_dir(String::from_utf8(b"FlyingFenix.log").unwrap(), FileMode::ReadWriteCreateOrAppend).unwrap();
+        let mut file = root
+            .open_file_in_dir(
+                String::from_utf8(b"FlyingFenix.log").unwrap(),
+                FileMode::ReadWriteCreateOrAppend,
+            )
+            .unwrap();
         file.write(b"Opened SD\n");
 
         Self { file }

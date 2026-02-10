@@ -28,21 +28,21 @@ use esp_hal::{
         OutputConfig,
     },
     spi::{
-        Mode,
         master::{
             Config,
             Spi,
         },
+        Mode,
     },
     time::Rate,
     timer::timg::TimerGroup,
 };
 use log::info;
 use lora_phy::{
-    LoRa,
-    RxMode,
     iv,
     sx126x,
+    LoRa,
+    RxMode,
 };
 use spaceblimp::common::lora_config;
 

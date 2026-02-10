@@ -20,7 +20,7 @@ use embassy_time::{
 };
 use esp_hal::{
     clock::CpuClock,
-    i2c::master:: {
+    i2c::master::{
         Config as I2cConfig,
         I2c,
     },
@@ -64,10 +64,10 @@ async fn main(spawner: Spawner) -> ! {
     info!("Embassy initialized!");
 
     let i2c = I2c::new(peripherals.I2C0, I2cConfig::default())
-    .unwrap()
-    .with_scl(peripherals.GPIO48)
-    .with_sda(peripherals.GPIO47)
-    .into_async();
+        .unwrap()
+        .with_scl(peripherals.GPIO48)
+        .with_sda(peripherals.GPIO47)
+        .into_async();
     // TODO: Spawn some tasks
     let _ = spawner;
 

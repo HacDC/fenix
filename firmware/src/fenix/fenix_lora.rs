@@ -5,7 +5,6 @@ use embassy_sync::{
 };
 use embassy_time::Delay;
 use esp_hal::{
-    Async,
     gpio::{
         Input,
         InputConfig,
@@ -15,27 +14,28 @@ use esp_hal::{
     },
     peripherals::Peripherals,
     spi::{
-        Mode,
         master::{
             Config,
             Spi,
         },
+        Mode,
     },
     time::Rate,
+    Async,
 };
 use log::info;
 use lora_phy::{
-    LoRa,
-    RxMode,
     iv::GenericSx126xInterfaceVariant,
     mod_params::{
         ModulationParams,
         PacketParams,
     },
     sx126x::{
-        Sx126x,
         Sx1262,
+        Sx126x,
     },
+    LoRa,
+    RxMode,
 };
 use static_cell::StaticCell;
 
