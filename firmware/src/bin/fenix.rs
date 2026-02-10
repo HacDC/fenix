@@ -8,7 +8,6 @@
 #![deny(clippy::large_stack_frames)]
 #![forbid(unsafe_code)]
 #![cfg_attr(debug_assertions, allow(dead_code, unused_imports, unreachable_code))]
-
 use embassy_executor::Spawner;
 use embassy_time::{
     Duration,
@@ -23,6 +22,10 @@ use esp_hal::{
     timer::timg::TimerGroup,
 };
 use log::info;
+use spaceblimp::fenix::fenix_sd::{
+    FenixSD,
+    FenixSDArgs,
+};
 
 #[panic_handler]
 fn panic(_: &core::panic::PanicInfo) -> ! {
@@ -64,6 +67,14 @@ async fn main(spawner: Spawner) -> ! {
         .with_scl(peripherals.GPIO48)
         .with_sda(peripherals.GPIO47)
         .into_async();
+
+    let _sd = FenixSD::new(FenixSDArgs {
+        spi2: peripherals.SPI2,
+        gpio34: peripherals.GPIO34,
+        gpio35: peripherals.GPIO35,
+        gpio36: peripherals.GPIO36,
+        gpio37: peripherals.GPIO37,
+    });
     // TODO: Spawn some tasks
     let _ = spawner;
 

@@ -18,7 +18,14 @@ use esp_hal::{
         Output,
         OutputConfig,
     },
-    peripherals::Peripherals,
+    peripherals::{
+        Peripherals,
+        GPIO34,
+        GPIO35,
+        GPIO36,
+        GPIO37,
+        SPI2,
+    },
     spi::{
         master::{
             Config as SpiConfig,
@@ -57,20 +64,28 @@ pub struct FenixSD {
     >,
 }
 
+pub struct FenixSDArgs {
+    pub spi2: SPI2<'static>,
+    pub gpio34: GPIO34<'static>,
+    pub gpio35: GPIO35<'static>,
+    pub gpio36: GPIO36<'static>,
+    pub gpio37: GPIO37<'static>,
+}
+
 impl FenixSD {
-    pub fn new(peripherals: Peripherals) -> Self {
+    pub fn new(args: FenixSDArgs) -> Self {
         let spi_bus: SpiMaster<'_, Blocking> = SpiMaster::new(
-            peripherals.SPI2,
+            args.spi2,
             SpiConfig::default()
                 .with_frequency(Rate::from_khz(400))
                 .with_mode(Mode::_0),
         )
         .unwrap()
-        .with_sck(peripherals.GPIO36)
-        .with_mosi(peripherals.GPIO35)
-        .with_miso(peripherals.GPIO37);
+        .with_sck(args.gpio36)
+        .with_mosi(args.gpio35)
+        .with_miso(args.gpio37);
         let sd_chip_select: Output<'_> =
-            Output::new(peripherals.GPIO34, Level::High, OutputConfig::default());
+            Output::new(args.gpio34, Level::High, OutputConfig::default());
         let spi_device: ExclusiveDevice<SpiMaster<'_, Blocking>, Output<'_>, EspDelay> =
             ExclusiveDevice::new(spi_bus, sd_chip_select, EspDelay::new()).unwrap();
         let sdcard = SdCard::new(spi_device, EspDelay::new());
