@@ -47,7 +47,7 @@ use crate::common::lora_config;
 
 pub struct FenixLoRa<'a> {
     rx_buffer: [u8; lora_config::PACKET_CONFIG.length as usize],
-    tx_buffer: [u8; lora_config::PACKET_CONFIG.length as usize],
+    _tx_buffer: [u8; lora_config::PACKET_CONFIG.length as usize],
     radio: LoRa<
         Sx126x<
             SpiDevice<'a, CriticalSectionRawMutex, Spi<'static, Async>, Output<'a>>,
