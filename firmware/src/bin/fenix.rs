@@ -6,6 +6,8 @@
     holding buffers for the duration of a data transfer."
 )]
 #![deny(clippy::large_stack_frames)]
+#![forbid(unsafe_code)]
+#![cfg_attr(debug_assertions, allow(dead_code, unused_imports, unreachable_code))]
 
 use embassy_executor::Spawner;
 use embassy_sync::{
