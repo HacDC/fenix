@@ -10,10 +10,6 @@
 #![cfg_attr(debug_assertions, allow(dead_code, unused_imports, unreachable_code))]
 
 use embassy_executor::Spawner;
-use embassy_sync::{
-    blocking_mutex::raw::CriticalSectionRawMutex,
-    mutex::Mutex,
-};
 use embassy_time::{
     Duration,
     Timer,
@@ -63,7 +59,7 @@ async fn main(spawner: Spawner) -> ! {
 
     info!("Embassy initialized!");
 
-    let i2c = I2c::new(peripherals.I2C0, I2cConfig::default())
+    let _i2c = I2c::new(peripherals.I2C0, I2cConfig::default())
         .unwrap()
         .with_scl(peripherals.GPIO48)
         .with_sda(peripherals.GPIO47)
