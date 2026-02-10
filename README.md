@@ -3,7 +3,7 @@
 [![Nix
 formatting](https://github.com/HacDC/fenix/actions/workflows/nix-fmt.yml/badge.svg)](https://github.com/HacDC/fenix/actions/workflows/nix-fmt.yml)
 
-[![Build Fenix Firmware for Spaceblimp VIII](https://github.com/HacDC/fenix/actions/workflows/build-fenix.yml/badge.svg)](https://github.com/HacDC/fenix/actions/workflows/build-fenix.yml)
+[![Rust CI](https://github.com/HacDC/fenix/actions/workflows/rust-ci.yml/badge.svg)](https://github.com/HacDC/fenix/actions/workflows/rust-ci.yml)
 
 [HacDC's Spaceblimp VIII](https://wiki.hacdc.org/en/Projects/spaceblimp/Space-Blimp)
 
