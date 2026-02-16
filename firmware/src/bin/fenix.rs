@@ -21,9 +21,12 @@ use esp_hal::{
     timer::timg::TimerGroup,
 };
 use log::info;
-use spaceblimp::fenix::fenix_sd::{
-    FenixSD,
-    FenixSDArgs,
+use spaceblimp::fenix:: {
+    fenix_servo::Servo,
+    fenix_sd::{
+        FenixSD,
+        FenixSDArgs,
+    }
 };
 
 #[panic_handler]
@@ -61,11 +64,12 @@ async fn main(spawner: Spawner) -> ! {
 
     info!("Embassy initialized!");
 
-    let _i2c = I2c::new(peripherals.I2C0, I2cConfig::default())
+    let mut i2c = I2c::new(peripherals.I2C0, I2cConfig::default())
         .unwrap()
         .with_scl(peripherals.GPIO48)
         .with_sda(peripherals.GPIO47)
         .into_async();
+    let mut servo = Servo::new(&mut i2c);
 
     let _sd = FenixSD::new(FenixSDArgs {
         spi2: peripherals.SPI2,
