@@ -22,5 +22,12 @@ If you want to build both without flashing either of them, then use this
 command:
 
 ```shell
-cargo run --bin fraublucher
+cargo build
+```
+
+## Troubleshooting
+
+Sometimes a successful board flash requires wiping the device first. 
+```shell
+esptool --port /dev/$PORT erase-flash
 ```
