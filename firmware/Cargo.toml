@@ -8,8 +8,8 @@ rust-version = "1.88"
 version      = "0.1.0"
 
 [dependencies]
+# https://docs.espressif.com/projects/rust/esp-hal/1.0.0/esp32/esp_hal/index.html
 esp-hal = { version = "~1.0", features = ["esp32s3", "log-04", "unstable"] }
-
 esp-rtos = { version = "0.2.0", features = [
   "embassy",
   "esp-alloc",
@@ -28,6 +28,7 @@ embassy-net = { version = "0.7.1", features = [
   "tcp",
   "udp",
 ] }
+embedded-hal = "1.0.0"
 embedded-io = "0.7.1"
 embedded-io-async = "0.7.0"
 esp-alloc = "0.9.0"

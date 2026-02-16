@@ -19,10 +19,15 @@ use embassy_time::{
 };
 use esp_hal::{
     clock::CpuClock,
+    i2c::master::{
+        Config,
+        I2c,
+    },
     spi::master::Spi,
     timer::timg::TimerGroup,
 };
 use log::info;
+use spaceblimp::fenix::fenix_servo::Servo;
 
 #[panic_handler]
 fn panic(_: &core::panic::PanicInfo) -> ! {
@@ -59,11 +64,26 @@ async fn main(spawner: Spawner) -> ! {
 
     info!("Embassy initialized!");
 
+    // https://docs.espressif.com/projects/rust/esp-hal/1.0.0/esp32/esp_hal/i2c/master/struct.I2c.html
+    let mut i2c = I2c::new(peripherals.I2C0, Config::default())
+        .unwrap()
+        // TODO: find the correct pins
+        .with_sda(peripherals.GPIO1)
+        .with_scl(peripherals.GPIO2);
+
+    let mut servo = Servo::new(&mut i2c);
+
     // TODO: Spawn some tasks
     let _ = spawner;
 
+    let mut counter = 0;
+
     loop {
+        counter += 1;
         Timer::after(Duration::from_secs(5)).await;
+        if counter > 9000 {
+            servo.pop(&mut i2c);
+        }
     }
 
     // for inspiration have a look at the examples at https://github.com/esp-rs/esp-hal/tree/esp-hal-v1.0.0/examples
