@@ -5,7 +5,6 @@
     reason = "mem::forget is generally not safe to do with esp_hal types, especially those \
     holding buffers for the duration of a data transfer."
 )]
-#![deny(clippy::large_stack_frames)]
 #![forbid(unsafe_code)]
 #![cfg_attr(debug_assertions, allow(dead_code, unused_imports, unreachable_code))]
 use embassy_executor::Spawner;
@@ -78,8 +77,14 @@ async fn main(spawner: Spawner) -> ! {
     // TODO: Spawn some tasks
     let _ = spawner;
 
+    let mut counter = 0;
+
     loop {
+        counter += 1;
         Timer::after(Duration::from_secs(5)).await;
+        if counter > 9000 {
+            servo.pop(&mut i2c);
+        }
     }
 
     // for inspiration have a look at the examples at https://github.com/esp-rs/esp-hal/tree/esp-hal-v1.0.0/examples

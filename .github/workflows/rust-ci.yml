@@ -1,0 +1,38 @@
+name: Rust CI
+run-name: ${{ github.actor }} doesn't know what she's doing 😬
+on:
+  push:
+    branches:
+      - main
+  pull_request: {}
+
+
+env:
+  CARGO_TERM_COLOR: always
+  RUSTFLAGS: "-D warnings"
+
+jobs:
+  Rust-CI:
+    runs-on: ubuntu-latest
+    # TODO: de-dupe this mess
+    steps:
+      - uses: actions/checkout@v5
+      - uses: cachix/install-nix-action@v31
+        with:
+          nix_path: nixpkgs=channel:nixos-stable
+      - name: Setup Dev Env
+        shell: 'nix develop --extra-experimental-features nix-command --extra-experimental-features flakes -c bash -e {0}'
+        working-directory: ./firmware
+        run: echo Hello World
+      - name: Check Rust Formatting
+        shell: 'nix develop --extra-experimental-features nix-command --extra-experimental-features flakes -c bash -e {0}'
+        working-directory: ./firmware
+        run: cargo fmt --check
+      - name: Build rust code
+        shell: 'nix develop --extra-experimental-features nix-command --extra-experimental-features flakes -c bash -e {0}'
+        working-directory: ./firmware
+        run: cargo build
+      - name: Run Clippy
+        shell: 'nix develop --extra-experimental-features nix-command --extra-experimental-features flakes -c bash -e {0}'
+        working-directory: ./firmware
+        run: cargo clippy --profile=release

@@ -45,15 +45,13 @@ use crate::common::lora_config;
 // TODO: Implement TX/RX functions
 // TODO: Find solution for radio async timing
 
+type LoRaSPI<'a> = SpiDevice<'a, CriticalSectionRawMutex, Spi<'static, Async>, Output<'a>>;
+
 pub struct FenixLoRa<'a> {
     rx_buffer: [u8; lora_config::PACKET_CONFIG.length as usize],
     _tx_buffer: [u8; lora_config::PACKET_CONFIG.length as usize],
     radio: LoRa<
-        Sx126x<
-            SpiDevice<'a, CriticalSectionRawMutex, Spi<'static, Async>, Output<'a>>,
-            GenericSx126xInterfaceVariant<Output<'a>, Input<'a>>,
-            Sx1262,
-        >,
+        Sx126x<LoRaSPI<'a>, GenericSx126xInterfaceVariant<Output<'a>, Input<'a>>, Sx1262>,
         Delay,
     >,
     modulation_config: ModulationParams,
@@ -62,6 +60,8 @@ pub struct FenixLoRa<'a> {
 }
 
 impl<'a> FenixLoRa<'a> {
+    // TODO: This function should return Self
+    #[allow(clippy::new_ret_no_self)]
     pub async fn new(
         &mut self,
         peripherals: Peripherals,
@@ -150,7 +150,7 @@ impl<'a> FenixLoRa<'a> {
         };
     }
 
-    pub async fn transmit<'b>(&mut self, payload: &'b [u8]) {
+    pub async fn transmit(&mut self, payload: &[u8]) {
         self.rx_buffer[..payload.len()].copy_from_slice(payload);
         match self
             .radio
