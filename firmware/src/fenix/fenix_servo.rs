@@ -22,4 +22,12 @@ impl Servo {
         self.is_popped = true;
         todo!();
     }
+
+    pub fn take_picture1(&mut self, _i2c: &mut impl I2c) {
+        todo!();
+    }
+
+    pub fn take_picture2(&mut self, _i2c: &mut impl I2c) {
+        todo!();
+    }
 }

@@ -21,12 +21,12 @@ use esp_hal::{
     timer::timg::TimerGroup,
 };
 use log::info;
-use spaceblimp::fenix:: {
-    fenix_servo::Servo,
+use spaceblimp::fenix::{
     fenix_sd::{
         FenixSD,
         FenixSDArgs,
-    }
+    },
+    fenix_servo::Servo,
 };
 
 #[panic_handler]

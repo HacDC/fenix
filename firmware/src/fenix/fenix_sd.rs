@@ -19,7 +19,6 @@ use esp_hal::{
         OutputConfig,
     },
     peripherals::{
-        Peripherals,
         GPIO34,
         GPIO35,
         GPIO36,
@@ -53,15 +52,11 @@ impl TimeSource for DummyTimeSource {
     }
 }
 
+type FenixSDCard =
+    SdCard<ExclusiveDevice<SpiMaster<'static, Blocking>, Output<'static>, EspDelay>, EspDelay>;
+
 pub struct FenixSD {
-    _file: File<
-        'static,
-        SdCard<ExclusiveDevice<SpiMaster<'static, Blocking>, Output<'static>, EspDelay>, EspDelay>,
-        DummyTimeSource,
-        4,
-        4,
-        1,
-    >,
+    _file: File<'static, FenixSDCard, DummyTimeSource, 4, 4, 1>,
 }
 
 pub struct FenixSDArgs {
