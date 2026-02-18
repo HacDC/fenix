@@ -9814,7 +9814,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "4bd9f5c6-45d1-423a-bc5e-fea60b97f2da")
-		(property "Reference" "J_PWR"
+		(property "Reference" "J_PWR1"
 			(at 38.1 91.4399 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -9881,7 +9881,7 @@
 		(instances
 			(project ""
 				(path "/cfd0b8a8-74a1-487b-95ef-a5983af16f57"
-					(reference "J_PWR")
+					(reference "J_PWR1")
 					(unit 1)
 				)
 			)
@@ -11147,7 +11147,7 @@
 				(justify right)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Parts:TRS_2.5mm"
 			(at 106.68 91.44 0)
 			(hide yes)
 			(show_name no)
@@ -12269,7 +12269,7 @@
 				(justify right)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Parts:TRS_3.5mm"
 			(at 93.98 91.44 0)
 			(hide yes)
 			(show_name no)
@@ -12408,7 +12408,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "f58dd217-5e1e-499c-baaf-4cedac216302")
-		(property "Reference" "J4_LORA_PWR"
+		(property "Reference" "J4_LORA_PWR1"
 			(at 32.004 42.418 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -12473,7 +12473,7 @@
 		(instances
 			(project "Fenix"
 				(path "/cfd0b8a8-74a1-487b-95ef-a5983af16f57"
-					(reference "J4_LORA_PWR")
+					(reference "J4_LORA_PWR1")
 					(unit 1)
 				)
 			)
