@@ -642,7 +642,7 @@
         "uuid": "cfd0b8a8-74a1-487b-95ef-a5983af16f57"
       }
     ],
-    "used_designators": "",
+    "used_designators": "REG1,J2,J4-5,#PWR24-26",
     "variants": []
   },
   "sheets": [
