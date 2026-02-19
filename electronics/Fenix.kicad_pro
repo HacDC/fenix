@@ -9,7 +9,7 @@
         "apply_defaults_to_fp_shapes": false,
         "apply_defaults_to_fp_text": false,
         "board_outline_line_width": 0.05,
-        "copper_line_width": 0.2,
+        "copper_line_width": 0.3,
         "copper_text_italic": false,
         "copper_text_size_h": 1.5,
         "copper_text_size_v": 1.5,
@@ -145,7 +145,7 @@
         "min_track_width": 0.3,
         "min_via_annular_width": 0.1,
         "min_via_diameter": 0.5,
-        "solder_mask_to_copper_clearance": 0.0,
+        "solder_mask_to_copper_clearance": 0.005,
         "use_height_for_length_calcs": true
       },
       "teardrop_options": [
@@ -642,7 +642,7 @@
         "uuid": "cfd0b8a8-74a1-487b-95ef-a5983af16f57"
       }
     ],
-    "used_designators": "REG1,J2,J4-5,#PWR24-26",
+    "used_designators": "",
     "variants": []
   },
   "sheets": [
