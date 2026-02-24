@@ -66,13 +66,6 @@ async fn main(spawner: Spawner) -> ! {
 
     info!("Embassy initialized!");
 
-    let mut i2c = I2c::new(peripherals.I2C0, I2cConfig::default())
-        .unwrap()
-        .with_scl(peripherals.GPIO48)
-        .with_sda(peripherals.GPIO47)
-        .into_async();
-    let mut servo = Servo::new(&mut i2c);
-
     let fs_root: FenixDirectory = fenix_sd::open_sd(FenixSDArgs {
         spi2: peripherals.SPI2,
         gpio34: peripherals.GPIO34,
@@ -82,6 +75,13 @@ async fn main(spawner: Spawner) -> ! {
     });
 
     let _logger = FenixLogger::new(&fs_root, "FlyingFenix.log");
+
+    let mut i2c = I2c::new(peripherals.I2C0, I2cConfig::default())
+        .unwrap()
+        .with_scl(peripherals.GPIO48)
+        .with_sda(peripherals.GPIO47)
+        .into_async();
+    let mut servo = Servo::new(&fs_root, "servo_state.bin", &mut i2c);
 
     // TODO: Spawn some tasks
     let _ = spawner;
