@@ -1,10 +1,9 @@
 extern crate alloc;
 use alloc::boxed::Box;
-use core::str as String;
 use embedded_hal_bus::spi::ExclusiveDevice;
 use embedded_sdmmc::{
+    Directory,
     File,
-    Mode as FileMode,
     SdCard,
     TimeSource,
     Timestamp,
@@ -37,7 +36,7 @@ use esp_hal::{
 };
 use log::info;
 
-struct DummyTimeSource;
+pub struct DummyTimeSource;
 
 impl TimeSource for DummyTimeSource {
     fn get_timestamp(&self) -> Timestamp {
@@ -52,12 +51,12 @@ impl TimeSource for DummyTimeSource {
     }
 }
 
-type FenixSDCard =
+pub type FenixSDCard =
     SdCard<ExclusiveDevice<SpiMaster<'static, Blocking>, Output<'static>, EspDelay>, EspDelay>;
 
-pub struct FenixSD {
-    _file: File<'static, FenixSDCard, DummyTimeSource, 4, 4, 1>,
-}
+pub type FenixFile<'a> = File<'a, FenixSDCard, DummyTimeSource, 4, 4, 1>;
+
+pub type FenixDirectory = Directory<'static, FenixSDCard, DummyTimeSource, 4, 4, 1>;
 
 pub struct FenixSDArgs {
     pub spi2: SPI2<'static>,
@@ -67,39 +66,26 @@ pub struct FenixSDArgs {
     pub gpio37: GPIO37<'static>,
 }
 
-impl FenixSD {
-    pub fn new(args: FenixSDArgs) -> Self {
-        let spi_bus: SpiMaster<'_, Blocking> = SpiMaster::new(
-            args.spi2,
-            SpiConfig::default()
-                .with_frequency(Rate::from_khz(400))
-                .with_mode(Mode::_0),
-        )
-        .unwrap()
-        .with_sck(args.gpio36)
-        .with_mosi(args.gpio35)
-        .with_miso(args.gpio37);
-        let sd_chip_select: Output<'_> =
-            Output::new(args.gpio34, Level::High, OutputConfig::default());
-        let spi_device: ExclusiveDevice<SpiMaster<'_, Blocking>, Output<'_>, EspDelay> =
-            ExclusiveDevice::new(spi_bus, sd_chip_select, EspDelay::new()).unwrap();
-        let sdcard = SdCard::new(spi_device, EspDelay::new());
-        info!("SD Card initialized: {:?}", sdcard.num_bytes());
-        let volume_manager = VolumeManager::new(sdcard, DummyTimeSource);
-        let volume_manager = Box::leak(volume_manager.into());
+pub fn open_sd(args: FenixSDArgs) -> FenixDirectory {
+    let spi_bus: SpiMaster<'_, Blocking> = SpiMaster::new(
+        args.spi2,
+        SpiConfig::default()
+            .with_frequency(Rate::from_khz(400))
+            .with_mode(Mode::_0),
+    )
+    .unwrap()
+    .with_sck(args.gpio36)
+    .with_mosi(args.gpio35)
+    .with_miso(args.gpio37);
+    let sd_chip_select: Output<'_> = Output::new(args.gpio34, Level::High, OutputConfig::default());
+    let spi_device: ExclusiveDevice<SpiMaster<'_, Blocking>, Output<'_>, EspDelay> =
+        ExclusiveDevice::new(spi_bus, sd_chip_select, EspDelay::new()).unwrap();
+    let sdcard = SdCard::new(spi_device, EspDelay::new());
+    info!("SD Card initialized: {:?}", sdcard.num_bytes());
+    let volume_manager = VolumeManager::new(sdcard, DummyTimeSource);
+    let volume_manager = Box::leak(volume_manager.into());
 
-        let volume = volume_manager.open_volume(VolumeIdx(0)).unwrap();
-        let volume = Box::leak(volume.into());
-        let root = volume.open_root_dir().unwrap();
-        let root = Box::leak(root.into());
-        let file = root
-            .open_file_in_dir(
-                String::from_utf8(b"FlyingFenix.log").unwrap(),
-                FileMode::ReadWriteCreateOrAppend,
-            )
-            .unwrap();
-        file.write(b"Opened SD\n").unwrap();
-
-        Self { _file: file }
-    }
+    let volume = volume_manager.open_volume(VolumeIdx(0)).unwrap();
+    let volume = Box::leak(volume.into());
+    volume.open_root_dir().unwrap()
 }

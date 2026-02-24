@@ -7,6 +7,7 @@
 )]
 #![forbid(unsafe_code)]
 #![cfg_attr(debug_assertions, allow(dead_code, unused_imports, unreachable_code))]
+use crate::fenix_sd::FenixDirectory;
 use embassy_executor::Spawner;
 use embassy_time::{
     Duration,
@@ -22,8 +23,9 @@ use esp_hal::{
 };
 use log::info;
 use spaceblimp::fenix::{
+    fenix_logging::FenixLogger,
     fenix_sd::{
-        FenixSD,
+        self,
         FenixSDArgs,
     },
     fenix_servo::Servo,
@@ -71,13 +73,16 @@ async fn main(spawner: Spawner) -> ! {
         .into_async();
     let mut servo = Servo::new(&mut i2c);
 
-    let _sd = FenixSD::new(FenixSDArgs {
+    let fs_root: FenixDirectory = fenix_sd::open_sd(FenixSDArgs {
         spi2: peripherals.SPI2,
         gpio34: peripherals.GPIO34,
         gpio35: peripherals.GPIO35,
         gpio36: peripherals.GPIO36,
         gpio37: peripherals.GPIO37,
     });
+
+    let _logger = FenixLogger::new(&fs_root, "FlyingFenix.log");
+
     // TODO: Spawn some tasks
     let _ = spawner;
 
