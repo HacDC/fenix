@@ -139,7 +139,8 @@ impl<'a> FenixLoRa<'a> {
                 lora_config::PACKET_CONFIG.implicit_header, // Implicit Header
                 lora_config::PACKET_CONFIG.length,          // Payload Length
                 lora_config::PACKET_CONFIG.crc,             // CRC Disabled
-                lora_config::PACKET_CONFIG.invert_iq, // Almost certainly don't want IQ inversion
+                lora_config::PACKET_CONFIG.invert_iq,       /* Almost certainly don't want IQ
+                                                             * inversion */
                 &self.modulation_config,
             ) {
                 Ok(config) => config,
