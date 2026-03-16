@@ -8,7 +8,10 @@
   outputs =
     { self, nixpkgs }:
     let
-      pkgs = import nixpkgs { system = "x86_64-linux"; };
+      pkgs = import nixpkgs {
+        system = "x86_64-linux";
+        config.allowUnfreePredicate = pkg: builtins.elem (nixpkgs.lib.getName pkg) [ "vscode" ];
+      };
     in
     let
       devshell = pkgs.mkShell {
@@ -16,6 +19,7 @@
           pkgs.rustup
           pkgs.espup
           pkgs.espflash
+          pkgs.vscode
         ];
         shellHook = ''
           if ! [ -f espidf.sh ]; then
