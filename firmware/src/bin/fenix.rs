@@ -66,22 +66,22 @@ async fn main(spawner: Spawner) -> ! {
 
     info!("Embassy initialized!");
 
-    let fs_root: FenixDirectory = fenix_sd::open_sd(FenixSDArgs {
-        spi2: peripherals.SPI2,
-        gpio34: peripherals.GPIO34,
-        gpio35: peripherals.GPIO35,
-        gpio36: peripherals.GPIO36,
-        gpio37: peripherals.GPIO37,
-    });
-
-    let _logger = FenixLogger::new(&fs_root, "FlyingFenix.log");
-
-    let mut i2c = I2c::new(peripherals.I2C0, I2cConfig::default())
-        .unwrap()
-        .with_scl(peripherals.GPIO48)
-        .with_sda(peripherals.GPIO47)
-        .into_async();
-    let mut servo = Servo::new(&fs_root, "servo_state.bin", &mut i2c);
+    // let fs_root: FenixDirectory = fenix_sd::open_sd(FenixSDArgs {
+    //     spi2: peripherals.SPI2,
+    //     gpio34: peripherals.GPIO34,
+    //     gpio35: peripherals.GPIO35,
+    //     gpio36: peripherals.GPIO36,
+    //     gpio37: peripherals.GPIO37,
+    // });
+    //
+    // let _logger = FenixLogger::new(&fs_root, "FlyingFenix.log");
+    //
+    // let mut i2c = I2c::new(peripherals.I2C0, I2cConfig::default())
+    //     .unwrap()
+    //     .with_scl(peripherals.GPIO48)
+    //     .with_sda(peripherals.GPIO47)
+    //     .into_async();
+    // let mut servo = Servo::new(&fs_root, "servo_state.bin", &mut i2c);
 
     // TODO: Spawn some tasks
     let _ = spawner;
@@ -91,9 +91,10 @@ async fn main(spawner: Spawner) -> ! {
     loop {
         counter += 1;
         Timer::after(Duration::from_secs(5)).await;
-        if counter > 9000 {
-            servo.pop(&mut i2c);
-        }
+        // if counter > 9000 {
+        //     servo.pop(&mut i2c);
+        // }
+        info!("Hello");
     }
 
     // for inspiration have a look at the examples at https://github.com/esp-rs/esp-hal/tree/esp-hal-v1.0.0/examples
