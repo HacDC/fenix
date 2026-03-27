@@ -19,6 +19,7 @@
           pkgs.rustup
           pkgs.espup
           pkgs.espflash
+          pkgs.esptool
           pkgs.vscode
         ];
         shellHook = ''
